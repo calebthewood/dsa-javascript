@@ -191,15 +191,15 @@ class LinkedList {
 
   /** removeAt(idx): return & remove item at idx, */
 
-  removeAt(idx) {
+  // removeAt(idx) {
 
-  }
+  // }
 
   /** average(): return an average of all values in the list */
 
-  average() {
+  // average() {
 
-  }
+  // }
 }
 
 module.exports = LinkedList;
