@@ -17,6 +17,7 @@ function sumZeroMultiplePointers(arr) {
   }
 }
 
+
 /************************************ Frequency Counter */
 
 function createFrequencyCounter(array) {

@@ -39,4 +39,54 @@ for (let i = 0; i <= len; i++) {
   return sum;
 };
 
-/***************************************************** Easy:  */
+/************************************************** Easy: Invert Binary Tree  */
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+
+function invertTree(root) {
+  if (!root) return root;
+  const nodeStack = [root];
+
+  while (nodeStack.length > 0) {
+      let current = nodeStack.pop();
+      let temp = current.left;
+      current.left = current.right;
+      current.right = temp;
+
+      if (current.left) {
+          nodeStack.push(current.left);
+      }
+      if (current.right) {
+          nodeStack.push(current.right);
+      }
+  }
+  return root;
+};
+
+
+/*********************************** Easy: Remove Duplicates from Sorted Array*/
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+function removeDuplicates(nums) {
+  let start = 0;
+  for(let i = 0; i < nums.length; i++) {
+      if(nums[i] != nums[i+1]){
+          nums[start] = nums[i];
+          start++;
+      }
+  }
+  return start;
+};
