@@ -37,3 +37,40 @@ function birthday(s, d, m) {
   }
   return count;
 }
+
+/**
+ * 'migratoryBirds' function
+ * Returns the number of sightings from the most sighted bird.
+ * in a tie, chooses the lower of id #'s in
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts INTEGER_ARRAY arr as parameter.
+ *
+ * time comp. O(n) space comp. O(n)
+ */
+
+function migratoryBirds(arr) {
+  const birdBook = {};
+  let maxCount = 0;
+  let maxBird = 0;
+  //freq. counter
+  for (let bird of arr) {
+      if (birdBook[bird]) {
+          birdBook[bird] += 1;
+      } else {
+          birdBook[bird] = 1;
+      }
+  }
+
+  for (let bird in birdBook) {
+      let count = birdBook[bird];
+      if (count > max) {
+          maxCount = count;
+          maxBird = Number(bird); // Ids converted to Ints for comparison
+      } else if (count === max) {
+          let thisBird = Number(bird)
+          count = Math.min(maxBird, thisBird)
+      }
+  }
+  return maxCount;
+}
