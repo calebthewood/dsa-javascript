@@ -3,8 +3,8 @@
 // 1. count longest possible sequential, increasing subset on an array
 
 /*
-[5,8,1,2,7,6,9] --> 4 b/c 5,6,7,8,9
-
+[5,8,1,2,7,6,9] --> 4
+  because: 5,6,7,8,9
 */
 
 function maxTickets(tickets) {
@@ -42,7 +42,7 @@ function maxTickets(tickets) {
  * Returns the number of k-length streaks found in the array.
  *
  * Edge cases,
- * what to do if k is 2, and there is a 6 month streak? return 1 or 3?
+ * what to do if k is 2, and there is a 6 month streak? return 1 or 3? idk
  *  */
 function countHighlyProfitableMonths(stockPrices, k) {
   let count = 0;
@@ -62,6 +62,7 @@ function countHighlyProfitableMonths(stockPrices, k) {
 }
 
 // 3. select user name and distance traveled, display top 100 in descending order
+// data pulled from 2 tables
 
 SELECT users.name, rides.distance
   FROM users
