@@ -1,5 +1,6 @@
 /**
- * 'birthday' function. Returns count of subarrays in s that
+ * Subarray Division - 'birthday'
+ * Returns count of subarrays in s that
  *  sum to m and have a length of d
  *
  * The function is expected to return an INTEGER.
@@ -39,7 +40,7 @@ function birthday(s, d, m) {
 }
 
 /**
- * 'migratoryBirds' function
+ * Divisible Sum Pairs - 'migratoryBirds'
  * Returns the number of sightings from the most sighted bird.
  * in a tie, chooses the lower of id #'s in
  *
@@ -64,10 +65,10 @@ function migratoryBirds(arr) {
 
   for (let bird in birdBook) {
       let count = birdBook[bird];
-      if (count > max) {
+      if (count > maxCount) {
           maxCount = count;
           maxBird = Number(bird); // Ids converted to Ints for comparison
-      } else if (count === max) {
+      } else if (count === maxCount) {
           let thisBird = Number(bird)
           count = Math.min(maxBird, thisBird)
       }
