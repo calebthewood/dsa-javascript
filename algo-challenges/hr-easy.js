@@ -9,7 +9,7 @@
  *  2. INTEGER d
  *  3. INTEGER m
  *
- * time:  space:
+ * time: O(n * m) space: O(1)
  */
 
 function birthday(s, d, m) {
@@ -39,15 +39,47 @@ function birthday(s, d, m) {
   return count;
 }
 
+
 /**
- * Divisible Sum Pairs - 'migratoryBirds'
+ * 'divisibleSumPairs'
+ *
+ * Given an array of integers and a positive integer k, determine the
+ * number of (i,j) pairs where i<j and ar[i]+ar[j] is divisible by k
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts following parameters:
+ *  1. INTEGER n
+ *  2. INTEGER k
+ *  3. INTEGER_ARRAY ar
+ *
+ * time: O(n * m) space: O(1)
+ */
+
+function divisibleSumPairs(n, k, ar) {
+  let [i, j, count] = [0, 1, 0];
+
+  while (i < n) {
+      if (j >= n) {
+          i += 1
+          j = i + 1;
+      }
+      if (i < j && (ar[i] + ar[j]) % k === 0) {
+          count += 1;
+      }
+      j += 1;
+  }
+  return count;
+}
+
+/**
+ * 'migratoryBirds'
  * Returns the number of sightings from the most sighted bird.
  * in a tie, chooses the lower of id #'s in
  *
  * The function is expected to return an INTEGER.
  * The function accepts INTEGER_ARRAY arr as parameter.
  *
- * time comp. O(n) space comp. O(n)
+ * time: O(n) space: O(n)
  */
 
 function migratoryBirds(arr) {
@@ -73,5 +105,5 @@ function migratoryBirds(arr) {
           count = Math.min(maxBird, thisBird)
       }
   }
-  return maxCount;
+  return maxBird;
 }
