@@ -231,3 +231,34 @@ function sockMerchant(n, ar) {
   }
   return pairCount;
 }
+
+/**
+ * 'pageCount' Counts the shortes # of page turns to get to a page
+ * starting from front or back.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts following parameters:
+ *  1. INTEGER n
+ *  2. INTEGER p
+ *
+ * time: O(1) space: O(n)
+ */
+function pageCount(n, p) {
+  const dist = n - p;
+  //Count from back
+  if (p > (n / 2)) {
+      // p is 2nd to last in an odd page count
+      if (n % 2 === 0 && dist === 1) {
+          return dist;
+          // count from back with even n
+      } else if (n % 2 === 0) {
+          return Math.ceil(dist / 2);
+          // count from back with odd n
+      } else {
+          return Math.floor(dist / 2);
+      }
+  // count from start
+  } else {
+      return Math.floor(p / 2);
+  }
+}
