@@ -262,3 +262,72 @@ function pageCount(n, p) {
       return Math.floor(p / 2);
   }
 }
+
+/**
+ * 'countingValleys' Given a string of U's (1 up) and D's (1 down),
+ * determine the number of 'valleys' consectutive movements below
+ * 'sea level', baseline 0.
+ *
+ * ex: 'UDDDDUUU' --> 1
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts following parameters:
+ *  1. INTEGER steps
+ *  2. STRING path
+ *
+ * time: O(n) space: O(1)
+ */
+
+function countingValleys(steps, path) {
+  let altitude = 0;
+  let valleyCount = 0;
+  let prevAlt = 0;
+  let index = 0;
+
+  while (index < steps) {
+      prevAlt = altitude;
+      altitude += path[index] === 'U' ? 1 : -1;
+      if (altitude === 0 && prevAlt < 0) {
+          valleyCount += 1;
+      }
+      index += 1;
+  }
+  return valleyCount;
+}
+
+
+/**
+ * 'getMoneySpent' find the highest priced keyboard & drive combo in budget
+ *
+ * Expects:
+ *  keyboards: array of keyboard prices
+ *  drives: array of drive prices
+ *  b: budget
+ *
+ *  time: O(n^2) space: O(1)
+ * could maybe improve time complexity by first sorting the arrays, then taking
+ * a binary search approach to matching, could write a big function to bring runtime
+ * to O(n log n), probably. It wouldn't be pretty :)
+ *
+ */
+function getMoneySpent(keyboards, drives, b) {
+  const kLen = keyboards.length;
+  const dLen = drives.length;
+  let maxCost = -1;
+  let kIndex = 0;
+  let dIndex = 0;
+  while (kIndex < kLen) {
+      const cost = keyboards[kIndex] + drives[dIndex];
+
+      if (cost <= b && cost > maxCost) {
+          maxCost = cost;
+      }
+      if (dIndex >= dLen) {
+          kIndex += 1;
+          dIndex = 0;
+      } else {
+          dIndex += 1;
+      }
+  }
+  return maxCost;
+}
