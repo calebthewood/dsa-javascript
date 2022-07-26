@@ -331,3 +331,20 @@ function getMoneySpent(keyboards, drives, b) {
   }
   return maxCost;
 }
+
+/** catAndMouse
+ * x: Cat A
+ * y: Cat B
+ * z: Mouse C
+ *
+ * accepts 2 distinct Integers between 0 and 100.
+ * returns output based on whether Cat A or Cat B is closest to Mouse C
+ *
+*/
+function catAndMouse(x, y, z) {
+  let catA = Math.abs(z - x);
+  let catB = Math.abs(z - y);
+  if (catA === catB) return "Mouse C";
+  if (catA > catB) return "Cat B";
+  return "Cat A";
+}
