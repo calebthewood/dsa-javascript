@@ -95,6 +95,13 @@ function areThereDuplicatesSet() {
 
 /******************************************* Multiple Pointers - averagePair */
 
+/**
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ * @param {[Number]} ints
+ * @param {Number} target
+ * @returns {Boolean} boolean
+ */
 function averagePair(ints, target) {
   if (ints.length < 2) return false;
 
@@ -116,7 +123,48 @@ function averagePair(ints, target) {
   return false;
 }
 
-console.log(averagePair([1,2,3],2.5)); // true
-console.log(averagePair([1,3,3,5,6,7,10,12,19],8)); // true
-console.log(averagePair([-1,0,3,4,5,6], 4.1)); // false
-console.log(averagePair([],4)); // false
+// console.log(averagePair([1,2,3],2.5)); // true
+// console.log(averagePair([1,3,3,5,6,7,10,12,19],8)); // true
+// console.log(averagePair([-1,0,3,4,5,6], 4.1)); // false
+// console.log(averagePair([],4)); // false
+
+/***************************************** Multiple Pointers - isSubsequence */
+
+function isSubstring(substring, string) {
+  let idx = 0;
+  let count = 0;
+  let subLen = substring.length;
+  let term = string.length - subLen;
+
+  while (idx < term) {
+    if (substring[idx] === substring[idx]) {
+      count += 1;
+      if (count === subLen) {
+        return true;
+      }
+    } else {
+      count = 0;
+    }
+    idx += 1;
+  }
+  return false;
+}
+
+function isSubsequence(subSequence, sequence) {
+  let sub = subSequence.split("");
+  for (let item of sequence) {
+    if (item === sub[0]) {
+      sub.shift();
+    }
+    if (sub.length === 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+console.log(isSubsequence('hello', 'hello world')); // true
+console.log(isSubsequence('sing', 'sting')); // true
+console.log(isSubsequence('abc', 'abracadabra')); // true
+console.log(isSubsequence('abc', 'acb')); // false (order matters)
