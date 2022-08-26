@@ -113,9 +113,9 @@ function averagePair(ints, target) {
     avg = (ints[left] + ints[right]) / 2;
 
     if (avg > target) {
-      right--;
+      right -= 1;
     } else if (avg < target) {
-      left++;
+      left += 1;
     } else {
       return true;
     }
@@ -130,6 +130,7 @@ function averagePair(ints, target) {
 
 /***************************************** Multiple Pointers - isSubsequence */
 
+/** Wrote the wrong function but it might come in handy later... */
 function isSubstring(substring, string) {
   let idx = 0;
   let count = 0;
@@ -150,18 +151,59 @@ function isSubstring(substring, string) {
   return false;
 }
 
+/**Accepts string or array and returns a reversed array to be used as a stack*/
+function toStack(items) {
+  const stack = [];
+  let idx = items.length - 1;
+  while (idx >= 0) {
+    stack.push(items[idx]);
+    idx -= 1;
+  }
+  return stack;
+}
+
+/**
+ * Time Complexity: O(n+m)
+ * Space Complexity: O(n)
+ * @param {String} subSequence
+ * @param {String} sequence
+ * @returns {Boolean} boolean
+ */
 function isSubsequence(subSequence, sequence) {
-  let sub = subSequence.split("");
+  let subStack = toStack(subSequence);
+  let current = subStack.pop();
+
   for (let item of sequence) {
-    if (item === sub[0]) {
-      sub.shift();
-    }
-    if (sub.length === 0) {
-      return true;
+    if (item === current) {
+      if (subStack.length === 0) {
+        return true;
+      }
+      current = subStack.pop();
     }
   }
   return false;
 }
+
+/** From Solution */
+function isSubsequenceRecursive(str1, str2) {
+  if(str1.length === 0) return true
+  if(str2.length === 0) return false
+  if(str2[0] === str1[0]) return isSubsequence(str1.slice(1), str2.slice(1))
+  return isSubsequence(str1, str2.slice(1))
+}
+/** From Solution */
+function isSubsequence(str1, str2) {
+  var i = 0;
+  var j = 0;
+  if (!str1) return true;
+  while (j < str2.length) {
+    if (str2[j] === str1[i]) i++;
+    if (i === str1.length) return true;
+    j++;
+  }
+  return false;
+}
+
 
 
 console.log(isSubsequence('hello', 'hello world')); // true
