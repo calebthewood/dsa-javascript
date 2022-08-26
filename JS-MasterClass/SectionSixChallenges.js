@@ -235,8 +235,50 @@ function maxSubarraySum(array, n) {
   return maxSum;
 }
 
-console.log(maxSubarraySum([100,200,300,400], 2)); // 700
-console.log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4));  // 39
-console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2)); // 5
-console.log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2)); // 5
-console.log(maxSubarraySum([2,3], 3)); // null
+// console.log(maxSubarraySum([100,200,300,400], 2)); // 700
+// console.log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4));  // 39
+// console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2)); // 5
+// console.log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2)); // 5
+// console.log(maxSubarraySum([2,3], 3)); // null
+
+/*************************************** Sliding Window - minSubArrayLen */
+
+
+/**
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ * @param {[Number]} array
+ * @param {Number} n
+ * @returns {Number}
+ * note: had to review solution to get this one right.
+ */
+function minSubArrayLen(array, n) {
+  const len = array.length;
+  if (len < 1) return 0;
+  let minWidth = Infinity;
+  let start = 0;
+  let end = 0;
+  let sum = 0;
+
+  while (start < len) {
+    if (sum < n) {
+      sum += array[end];
+      end += 1;
+    } else if (sum >= n) {
+      minWidth = Math.min(minWidth,end - start);
+      sum -= array[start];
+      start += 1;
+    } else {
+      break;
+    }
+  }
+  return minWidth === Infinity ? 0: minWidth;
+}
+
+// console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7)); // 2 -> because [4,3] is the smallest subarray
+// console.log(minSubArrayLen([2, 1, 6, 5, 4], 9)); // 2 -> because [5,4] is the smallest subarray
+// console.log(minSubArrayLen([3, 1, 7, 11, 2, 9, 8, 21, 62, 33, 19], 52)); // 1 -> because [62] is greater than 52
+// console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 39)); // 3
+// console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 55)); // 5
+// console.log(minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11)); // 2
+// console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 95)); // 0
