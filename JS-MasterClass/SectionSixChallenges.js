@@ -265,14 +265,14 @@ function minSubArrayLen(array, n) {
       sum += array[end];
       end += 1;
     } else if (sum >= n) {
-      minWidth = Math.min(minWidth,end - start);
+      minWidth = Math.min(minWidth, end - start);
       sum -= array[start];
       start += 1;
     } else {
       break;
     }
   }
-  return minWidth === Infinity ? 0: minWidth;
+  return minWidth === Infinity ? 0 : minWidth;
 }
 
 // console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7)); // 2 -> because [4,3] is the smallest subarray
@@ -282,3 +282,50 @@ function minSubArrayLen(array, n) {
 // console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 55)); // 5
 // console.log(minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11)); // 2
 // console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 95)); // 0
+
+/************************************* Sliding Window - findLongestSubstring */
+/** Didn't end up using this */
+function recordInstances(items) {
+  const instances = {};
+  items.forEach((item, idx) => {
+    if (item in instances) {
+      instances[item].push(idx);
+    } else {
+      instances[item] = [idx];
+    }
+  });
+  return instances;
+}
+
+/**
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ * @param {String} str
+ * @returns {Number}
+ */
+function findLongestSubstring(str) {
+  let longest = 0;
+  let seen = {};
+  let start = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (seen[char]) {
+      start = Math.max(start, seen[char]);
+    }
+    // index - beginning of substring + 1 (to include current in count)
+    longest = Math.max(longest, i - start + 1);
+    // store the index of the next char so as to not double count
+    seen[char] = i + 1;
+  }
+  return longest;
+}
+
+console.log(findLongestSubstring('')); // 0
+console.log(findLongestSubstring('rithmschool')); // 7
+console.log(findLongestSubstring('thisisawesome')); // 6
+console.log(findLongestSubstring('thecatinthehat')); // 7
+console.log(findLongestSubstring('bbbbbb')); // 1
+console.log(findLongestSubstring('longestsubstring')); // 8
+console.log(findLongestSubstring('thisishowwedoit')); // 6
+
