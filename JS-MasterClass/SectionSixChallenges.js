@@ -186,10 +186,10 @@ function isSubsequence(subSequence, sequence) {
 
 /** From Solution */
 function isSubsequenceRecursive(str1, str2) {
-  if(str1.length === 0) return true
-  if(str2.length === 0) return false
-  if(str2[0] === str1[0]) return isSubsequence(str1.slice(1), str2.slice(1))
-  return isSubsequence(str1, str2.slice(1))
+  if (str1.length === 0) return true;
+  if (str2.length === 0) return false;
+  if (str2[0] === str1[0]) return isSubsequence(str1.slice(1), str2.slice(1));
+  return isSubsequence(str1, str2.slice(1));
 }
 /** From Solution */
 function isSubsequence(str1, str2) {
@@ -204,9 +204,39 @@ function isSubsequence(str1, str2) {
   return false;
 }
 
+// console.log(isSubsequence('hello', 'hello world')); // true
+// console.log(isSubsequence('sing', 'sting')); // true
+// console.log(isSubsequence('abc', 'abracadabra')); // true
+// console.log(isSubsequence('abc', 'acb')); // false (order matters)
 
+/*************************************** Sliding Window - maxSubarraySum */
 
-console.log(isSubsequence('hello', 'hello world')); // true
-console.log(isSubsequence('sing', 'sting')); // true
-console.log(isSubsequence('abc', 'abracadabra')); // true
-console.log(isSubsequence('abc', 'acb')); // false (order matters)
+/**
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ * @param {[Number]} array
+ * @param {Number} n
+ * @returns {Number}
+ */
+function maxSubarraySum(array, n) {
+  const len = array.length;
+  if (n > len) return null;
+  let sum = 0;
+  let maxSum = -Infinity;
+  for (let i = 0; i < len; i++) {
+    sum += array[i];
+    if (i >= n) {
+      sum -= array[i - n];
+    }
+    if (sum > maxSum) {
+      maxSum = sum;
+    }
+  }
+  return maxSum;
+}
+
+console.log(maxSubarraySum([100,200,300,400], 2)); // 700
+console.log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4));  // 39
+console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2)); // 5
+console.log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2)); // 5
+console.log(maxSubarraySum([2,3], 3)); // null
