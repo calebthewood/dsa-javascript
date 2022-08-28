@@ -348,3 +348,32 @@ function catAndMouse(x, y, z) {
   if (catA > catB) return "Cat B";
   return "Cat A";
 }
+
+
+
+/**
+ * Time Complexity O(n^2)
+ * Space Complexity O(1)
+ *
+ * Returns length of longest subarray where absolute difference between any two
+ * elements is 0 or 1.
+ * @param {[Number]} a
+ * @returns {Number}
+ */
+function pickingNumbers(a) {
+  const len = a.length;
+  let maxCount = -Infinity;
+
+  for (let i = 0; i < len; i++) {
+      let count = 1;
+      for (let j = 0; j < len; j++) {
+          if (i !== j) {
+              if (a[i] === a[j] || a[i] === a[j] - 1) {
+                  count += 1;
+              }
+          }
+      }
+      maxCount = Math.max(count, maxCount)
+  }
+  return maxCount
+}
