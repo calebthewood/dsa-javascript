@@ -1,5 +1,34 @@
 "use strict"
 
+/** My Solutuion 2nd Algo Challenge From AWS SDE Interview
+ * The first question had to do with finding the max number of ways
+ * you can combine 2 and 4 wheeled vehicles to get to a number. A fairly
+ * easy math problem.
+ */
+function applicationPairs(deviceCapacity, foregroundAppList, backgroundAppList) {
+  let maxCapacity = Infinity
+  let output = [];
+
+  for (let [fId, fMemory] of foregroundAppList) {
+      for (let [bId, bMemory] of backgroundAppList) {
+          let capacity = deviceCapacity - fMemory - bMemory;
+          if (capacity >= 0) {
+              if (capacity < maxCapacity) {
+                  output = [[fId, bId]];
+                  maxCapacity = capacity;
+              } else if (capacity === maxCapacity) {
+                  output.push([fId, bId])
+              }
+
+          }
+      }
+  }
+  return output;
+}
+
+console.log(applicationPairs(7,[[1,2],[2,4],[3,6]], [[1,2]]))
+
+
 // 1. count longest possible sequential, increasing subset on an array
 
 /*
