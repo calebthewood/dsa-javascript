@@ -93,10 +93,10 @@ function countHighlyProfitableMonths(stockPrices, k) {
 // 3. select user name and distance traveled, display top 100 in descending order
 // data pulled from 2 tables
 
-SELECT users.name, rides.distance
-  FROM users
-  JOIN rides
-    ON rides.userid = users.id
-  GROUP BY users.name
-  ORDER BY rides.distance DESC
-  LIMIT 100;
+// SELECT users.name, rides.distance
+//   FROM users
+//   JOIN rides
+//     ON rides.userid = users.id
+//   GROUP BY users.name
+//   ORDER BY rides.distance DESC
+//   LIMIT 100;
