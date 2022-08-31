@@ -377,3 +377,24 @@ function pickingNumbers(a) {
   }
   return maxCount
 }
+
+/**
+ * Time Complexity O(n^2)
+ * Space Complexity O(1)
+ *
+ * @param {[String]} strings
+ * @param {[String]} queries
+ * @returns {[Number]}
+ */
+function matchingStrings(strings, queries) {
+  const output = [];
+
+  for (let query of queries) {
+      let count = 0;
+      for (let string of strings) {
+          if (string === query) count += 1;
+      }
+      output.push(count);
+  }
+  return output;
+}
