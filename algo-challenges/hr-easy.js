@@ -145,39 +145,39 @@ function isRussoLeapYear(year) {
  * Returns Boolean
  * 1918 --> False
  */
-function isRussoLeapYear(year){
-    // Gregorian Calendar
-    if (year >= 1918) {
-        if (year % 400 === 0) {
-            return true;
-        } else if (year % 4 === 0 && year % 100 !== 0) {
-            return true;
-        } else {
-            return false;
-        }
-    // Julian Calendar
+function isRussoLeapYear(year) {
+  // Gregorian Calendar
+  if (year >= 1918) {
+    if (year % 400 === 0) {
+      return true;
+    } else if (year % 4 === 0 && year % 100 !== 0) {
+      return true;
     } else {
-        if (year % 4 === 0) {
-            return true;
-        } else {
-            return false;
-        }
+      return false;
     }
+    // Julian Calendar
+  } else {
+    if (year % 4 === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 function dayOfProgrammer(year) {
-    const isLeap = isRussoLeapYear(year);
-    if (year === 1918) return "26.09.1918";
-    if (isLeap) return `12.09.${year}`;
-    if (!isLeap) return `13.09.${year}`;
+  const isLeap = isRussoLeapYear(year);
+  if (year === 1918) return "26.09.1918";
+  if (isLeap) return `12.09.${year}`;
+  if (!isLeap) return `13.09.${year}`;
 }
- /**
-  * 'dayOfProgrammer'
-  * Finds the 256th day of the programmer in Russia for years 1700 - 2700
-  * accounts for change from Julian to Gregorian calendars
-  * The function is expected to return a STRING.
-  * The function accepts INTEGER year as parameter.
-  */
+/**
+ * 'dayOfProgrammer'
+ * Finds the 256th day of the programmer in Russia for years 1700 - 2700
+ * accounts for change from Julian to Gregorian calendars
+ * The function is expected to return a STRING.
+ * The function accepts INTEGER year as parameter.
+ */
 function dayOfProgrammer(year) {
   const isLeap = isRussoLeapYear(year);
   if (year === 1918) return "26.09.1918";
@@ -216,18 +216,18 @@ function sockMerchant(n, ar) {
   let pairCount = 0;
   const sockDrawer = {};
   for (let sock of ar) {
-      if (sock in sockDrawer) {
-          sockDrawer[sock] += 1;
-      } else {
-          sockDrawer[sock] = 1;
-      }
+    if (sock in sockDrawer) {
+      sockDrawer[sock] += 1;
+    } else {
+      sockDrawer[sock] = 1;
+    }
   }
 
   for (let sock in sockDrawer) {
-      let sockCount = sockDrawer[sock]
-      if (sockCount > 1) {
-          pairCount += Math.floor(sockCount / 2);
-      }
+    let sockCount = sockDrawer[sock];
+    if (sockCount > 1) {
+      pairCount += Math.floor(sockCount / 2);
+    }
   }
   return pairCount;
 }
@@ -247,19 +247,19 @@ function pageCount(n, p) {
   const dist = n - p;
   //Count from back
   if (p > (n / 2)) {
-      // p is 2nd to last in an odd page count
-      if (n % 2 === 0 && dist === 1) {
-          return dist;
-          // count from back with even n
-      } else if (n % 2 === 0) {
-          return Math.ceil(dist / 2);
-          // count from back with odd n
-      } else {
-          return Math.floor(dist / 2);
-      }
-  // count from start
+    // p is 2nd to last in an odd page count
+    if (n % 2 === 0 && dist === 1) {
+      return dist;
+      // count from back with even n
+    } else if (n % 2 === 0) {
+      return Math.ceil(dist / 2);
+      // count from back with odd n
+    } else {
+      return Math.floor(dist / 2);
+    }
+    // count from start
   } else {
-      return Math.floor(p / 2);
+    return Math.floor(p / 2);
   }
 }
 
@@ -285,12 +285,12 @@ function countingValleys(steps, path) {
   let index = 0;
 
   while (index < steps) {
-      prevAlt = altitude;
-      altitude += path[index] === 'U' ? 1 : -1;
-      if (altitude === 0 && prevAlt < 0) {
-          valleyCount += 1;
-      }
-      index += 1;
+    prevAlt = altitude;
+    altitude += path[index] === 'U' ? 1 : -1;
+    if (altitude === 0 && prevAlt < 0) {
+      valleyCount += 1;
+    }
+    index += 1;
   }
   return valleyCount;
 }
@@ -317,17 +317,17 @@ function getMoneySpent(keyboards, drives, b) {
   let kIndex = 0;
   let dIndex = 0;
   while (kIndex < kLen) {
-      const cost = keyboards[kIndex] + drives[dIndex];
+    const cost = keyboards[kIndex] + drives[dIndex];
 
-      if (cost <= b && cost > maxCost) {
-          maxCost = cost;
-      }
-      if (dIndex >= dLen) {
-          kIndex += 1;
-          dIndex = 0;
-      } else {
-          dIndex += 1;
-      }
+    if (cost <= b && cost > maxCost) {
+      maxCost = cost;
+    }
+    if (dIndex >= dLen) {
+      kIndex += 1;
+      dIndex = 0;
+    } else {
+      dIndex += 1;
+    }
   }
   return maxCost;
 }
@@ -365,17 +365,17 @@ function pickingNumbers(a) {
   let maxCount = -Infinity;
 
   for (let i = 0; i < len; i++) {
-      let count = 1;
-      for (let j = 0; j < len; j++) {
-          if (i !== j) {
-              if (a[i] === a[j] || a[i] === a[j] - 1) {
-                  count += 1;
-              }
-          }
+    let count = 1;
+    for (let j = 0; j < len; j++) {
+      if (i !== j) {
+        if (a[i] === a[j] || a[i] === a[j] - 1) {
+          count += 1;
+        }
       }
-      maxCount = Math.max(count, maxCount)
+    }
+    maxCount = Math.max(count, maxCount);
   }
-  return maxCount
+  return maxCount;
 }
 
 /**
@@ -390,11 +390,36 @@ function matchingStrings(strings, queries) {
   const output = [];
 
   for (let query of queries) {
-      let count = 0;
-      for (let string of strings) {
-          if (string === query) count += 1;
-      }
-      output.push(count);
+    let count = 0;
+    for (let string of strings) {
+      if (string === query) count += 1;
+    }
+    output.push(count);
   }
   return output;
 }
+
+/**
+ *
+ * @param {Number} n
+ * @param {[Number]} queries
+ * @returns {Number} max value
+ */
+function arrayManipulation(n, queries) {
+  const output = { max: -Infinity };
+  for (let [start, end, delta] of queries) {
+    for (let i = start; i <= end; i++) {
+      if (i in output) {
+        output[i] += delta;
+      } else {
+        output[i] = delta;
+      }
+      if (output[i] > output['max']) {
+        output['max'] = output[i];
+      }
+    }
+  }
+  console.table(output)
+  return output["max"];
+}
+
