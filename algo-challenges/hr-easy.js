@@ -405,6 +405,7 @@ function matchingStrings(strings, queries) {
  * @param {[Number]} queries
  * @returns {Number} max value
  */
+
 function arrayManipulation(n, queries) {
   const output = { max: -Infinity };
   for (let [start, end, delta] of queries) {
