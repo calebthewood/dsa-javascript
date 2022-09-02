@@ -48,4 +48,50 @@ function selectionSort(array) {
   return array;
 }
 
-console.log(selectionSort([4, 3, 2, 1,6,8,9,10,45,23,11,24,17]));
+// console.log(selectionSort([4, 3, 2, 1,6,8,9,10,45,23,11,24,17]));
+
+/**
+ * Time Complexity O(n^2)
+ * Space Complexty O(1)
+ * @param {[Number]} array
+ * @returns {[Number]}
+ */
+function insertionSort(array) {
+  const len = array.length;
+  for (var i = 1; i < len; i++) {
+    let currentVal = array[i];
+    for (var j = i - 1; j >= 0 && array[j] > currentVal; j--) {
+      array[j + 1] = array[j];
+    }
+    array[j + 1] = currentVal;
+  }
+  return array;
+}
+
+// console.log(insertionSort([4, 3, 2, 1,6,8,9,10,45,23,11,24,17]));
+
+/* ********************************** Merge Sort */
+
+function merge(arr1, arr2) {
+  const output = [];
+  let i = 0;
+  let j = 0;
+
+  while (i < arr1.length && j < arr2.length) {
+    if (arr1[i] <= arr2[j]) {
+      output.push(arr1[i]);
+      i += 1;
+    } else {
+      output.push(arr2[j]);
+      j += 1;
+    }
+  }
+  if (arr1.length === 0 && arr2.length > 0) {
+    output.push(...arr2);
+  } else if (arr2.length === 0 && arr1.length > 0) {
+    output.push(...arr1);
+  }
+  return output;
+}
+
+console.log(merge([], [2,4,6]));
