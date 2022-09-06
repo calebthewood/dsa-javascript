@@ -122,19 +122,29 @@ function mergeSort(array) {
 // console.log(mergeSort([9, 7, 5, 5, 1, 3, 2, 4, 6, 8]));
 
 /** */
-function pivot(array, start = 0, end = array.length + 1) {
+function pivot(array, start = 0, end = array.length - 1) {
   let pivot = array[start];
   let swapIndex = start;
 
-  for (let i = start + 1; i < array.length; i++) {
+  for (let i = start + 1; i <= end; i++) {
     if (pivot > array[i]) {
       swapIndex += 1;
       swap(array, swapIndex, i);
-      console.log(array);
     }
-    swap(array, start, swapIndex);
   }
+  swap(array, start, swapIndex);
   return swapIndex;
 }
 
-console.log(pivot([9,4,8,2,1,5,7,6,3]));
+function quickSort(array, left = 0, right = array.length - 1) {
+  if (left < right) {
+    let pivotIndex = pivot(array, left, right);
+    //left
+    quickSort(array, left, pivotIndex - 1);
+    //right
+    quickSort(array, pivotIndex + 1, right);
+  }
+  return array;
+}
+
+console.log(quickSort([9, 4, 8, 2, 1, 5, 7, 6, 3]));
