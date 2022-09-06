@@ -72,6 +72,13 @@ function insertionSort(array) {
 
 /* ********************************** Merge Sort */
 
+/**
+ *  * Time Complexity O(n log n)
+ * Space Complexity O()
+ * @param {[Number]} arr1
+ * @param {[Number]} arr2
+ * @returns {[Number]} Sorted array.
+ */
 function merge(arr1, arr2) {
   const output = [];
   let i = 0;
@@ -86,12 +93,48 @@ function merge(arr1, arr2) {
       j += 1;
     }
   }
-  if (arr1.length === 0 && arr2.length > 0) {
-    output.push(...arr2);
-  } else if (arr2.length === 0 && arr1.length > 0) {
-    output.push(...arr1);
+  while (i < arr1.length) {
+    output.push(arr1[i]);
+    i++;
+  }
+  while (j < arr2.length) {
+    output.push(arr2[j]);
+    j++;
   }
   return output;
 }
 
-console.log(merge([], [2,4,6]));
+/**
+ * Time Complexity O(n log n)
+ * Space Complexity O()
+ * @param {[Number]} array
+ * @returns
+ */
+function mergeSort(array) {
+  if (array.length <= 1) return array;
+  let mid = Math.floor(array.length / 2);
+  let left = mergeSort(array.slice(0, mid));
+  let right = mergeSort(array.slice(mid));
+  console.log(left);
+  return merge(left, right);
+}
+
+// console.log(mergeSort([9, 7, 5, 5, 1, 3, 2, 4, 6, 8]));
+
+/** */
+function pivot(array, start = 0, end = array.length + 1) {
+  let pivot = array[start];
+  let swapIndex = start;
+
+  for (let i = start + 1; i < array.length; i++) {
+    if (pivot > array[i]) {
+      swapIndex += 1;
+      swap(array, swapIndex, i);
+      console.log(array);
+    }
+    swap(array, start, swapIndex);
+  }
+  return swapIndex;
+}
+
+console.log(pivot([9,4,8,2,1,5,7,6,3]));
