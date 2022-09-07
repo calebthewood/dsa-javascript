@@ -1,11 +1,15 @@
 "use strict";
-
+/**
+ * Handy swap method to switch two elements. Used throughout.
+ */
 function swap(arr, idx1, idx2) {
   let temp = arr[idx1];
   arr[idx1] = arr[idx2];
   arr[idx2] = temp;
 }
 
+
+/* ***************************************** Bubble Sort */
 function bubbleSort(array) {
   const len = array.length;
 
@@ -24,6 +28,8 @@ function bubbleSort(array) {
 }
 
 // console.log(bubbleSort([1, 5, 50, 99, 13, 56, 23, 7, 3, 4, 1, 9, 2]));
+
+/* ***************************************** Selection Sort */
 
 /**
  * Time Complexity O(n^2)
@@ -50,6 +56,9 @@ function selectionSort(array) {
 
 // console.log(selectionSort([4, 3, 2, 1,6,8,9,10,45,23,11,24,17]));
 
+
+/* ***************************************** Insertion Sort */
+
 /**
  * Time Complexity O(n^2)
  * Space Complexty O(1)
@@ -70,7 +79,7 @@ function insertionSort(array) {
 
 // console.log(insertionSort([4, 3, 2, 1,6,8,9,10,45,23,11,24,17]));
 
-/* ********************************** Merge Sort */
+/* ***************************************** Merge Sort */
 
 /**
  *  * Time Complexity O(n log n)
@@ -121,6 +130,8 @@ function mergeSort(array) {
 
 // console.log(mergeSort([9, 7, 5, 5, 1, 3, 2, 4, 6, 8]));
 
+/* ***************************************** Quick Sort */
+
 /** */
 function pivot(array, start = 0, end = array.length - 1) {
   let pivot = array[start];
@@ -136,15 +147,63 @@ function pivot(array, start = 0, end = array.length - 1) {
   return swapIndex;
 }
 
+/**
+ * Time Complexity O(n^2)
+ *    average can be O(n log n)
+ * Space Complexity O()
+ * @param {[Number]} array
+ * @param {Number} left
+ * @param {Number} right
+ * @returns
+ */
 function quickSort(array, left = 0, right = array.length - 1) {
   if (left < right) {
     let pivotIndex = pivot(array, left, right);
-    //left
-    quickSort(array, left, pivotIndex - 1);
-    //right
-    quickSort(array, pivotIndex + 1, right);
+    quickSort(array, left, pivotIndex - 1);     //left
+    quickSort(array, pivotIndex + 1, right);    //right
   }
   return array;
 }
 
-console.log(quickSort([9, 4, 8, 2, 1, 5, 7, 6, 3]));
+// console.log(quickSort([9, 4, 8, 2, 1, 5, 7, 6, 3]));
+
+/* ***************************************** Radix Sort */
+
+function getDigit(num, i) {
+  return Math.floor(Math.abs(num) / Math.pow(10, i)) % 10;
+}
+
+function digitCount(num) {
+	if (num === 0) return 1;
+	return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+function mostDigits(nums) {
+  let maxDigits = 0;
+  for (let i = 0; i < nums.length; i++) {
+    maxDigits = Math.max(maxDigits, digitCount(nums[i]));
+  }
+  return maxDigits;
+}
+
+/**
+ * Time Complexity O(n * m)
+ * Space Complexity O(n + m)
+ * @param {[Number]} nums
+ * @returns {[Number]}
+ */
+function radixSort(nums) {
+  let largest = mostDigits(nums);
+
+  for (let k = 0; k < largest; k++) {
+    let digitBuckets = Array.from({ length: 10 }, () => []);
+    for (let i = 0; i < nums.length; i++) {
+      let digit = getDigit(nums[i], k);
+      digitBuckets[digit].push(nums[i]);
+    }
+    nums = [].concat(...digitBuckets);
+  }
+  return nums;
+}
+
+console.log(radixSort([100, 9000, 50, 33, 445, 678]));
