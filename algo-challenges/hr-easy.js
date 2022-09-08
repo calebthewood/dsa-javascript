@@ -445,3 +445,21 @@ add that to position 2, and so forth, looking for the point where
 it was the greatest.
 */
 
+
+/**
+ * Time Complexity:  O(n)
+ * Space Complexity: O(1)
+ */
+function insertNodeAtTail(head, data) {
+  let node = new SinglyLinkedListNode(data);
+  if (!head) {
+      head = node;
+      return head
+  }
+  let current = head;
+  while (current.next) {
+      current = current.next;
+  }
+  current.next = node;
+  return head;
+}
