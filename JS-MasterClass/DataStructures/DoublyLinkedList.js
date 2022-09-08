@@ -138,20 +138,46 @@ class DoublyLinkedList {
     let node = this.get(index);
     let prevNode = node.prev;
     let nextNode = node.next;
-    prevNode.next = nextNode, nextNode.prev = prevNode;
-    node.prev = null, node.next = null;
+    prevNode.next = nextNode
+    nextNode.prev = prevNode;
+
+    node.prev = null, node.next = null; //sever node from list
     this.length -= 1;
     return node;
   }
+
+  reverse() {
+    if (!this.head) return;
+    if (this.length === 1) return this;
+
+    let len = this.length;
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    while (len > 0) {
+      console.log(node.val)
+      len -= 1;
+
+      let temp = node.next;
+      node.next = node.prev;
+      node.prev = temp;
+
+      node = node.prev;
+    }
+    this.head.prev = null;
+    this.tail.next = null;
+    return this;
+  }
+
+
+
 }
 
-
 let list = new DoublyLinkedList();
-list.push(1);
-list.push(2);
-list.push(3);
-list.push(4);
-list.unshift(0);
-console.log(list.insert(3, "Hi"));
-console.log(list.remove(5));
-console.log(list.print());
+list.push(0).push(1).push(2).push(3).push(4);
+
+list.print();
+console.log(list.reverse());
+list.print();
+
