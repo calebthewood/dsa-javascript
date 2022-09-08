@@ -463,3 +463,37 @@ function insertNodeAtTail(head, data) {
   current.next = node;
   return head;
 }
+
+/**
+ * Time Complexity:  O(1)
+ * Space Complexity: O(1)
+ */
+function insertNodeAtHead(head, data) {
+  let node = new SinglyLinkedListNode(data);
+  if (!head) {
+      head = node;
+      return head;
+  }
+  let current = head;
+  node.next = current;
+  head = node;
+  return head;
+}
+
+/**
+ * Time Complexity:  O(n)
+ * Space Complexity: O(1)
+ */
+function insertNodeAtPosition(head, data, position) {
+  /* potential edge cases:
+  1. head is null, insert data at head or throw err?
+  2. position is invalid, return null? */
+  let node = new SinglyLinkedListNode(data);
+  let current = head;
+  for (let i = 0; i < position-1; i++) {
+      current = current.next;
+  }
+  node.next = current.next;
+  current.next = node;
+  return head;
+}
