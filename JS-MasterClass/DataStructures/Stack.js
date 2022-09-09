@@ -14,13 +14,23 @@ class Stack {
     this.size = 0;
   }
 
+  print() {
+    const output = [];
+    let current = this.first;
+    while (current) {
+      output.push(current.val);
+      current = current.next;
+    }
+    console.log(output.join(" "));
+  }
+
   push(val) {
     let node = new Node(val);
     if (!this.first) {
       this.first = node;
       this.last = node;
     } else {
-      first = this.first;
+      let first = this.first;
       this.first = node;
       node.next = first;
     }
@@ -38,6 +48,19 @@ class Stack {
     }
     popped.next = null;
     this.size -= 1;
-    return this.size;
+    return popped.val;
   }
 }
+
+let stack = new Stack;
+stack.push(1)
+stack.push(2)
+stack.push(3)
+stack.push(4)
+stack.print();
+console.log(stack.pop())
+console.log(stack.pop())
+console.log(stack.pop())
+console.log(stack.pop())
+console.log(stack.pop())
+stack.print();
