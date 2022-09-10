@@ -195,7 +195,6 @@ var lengthOfLongestSubstring = function (s) {
             i++;
         }
     }
-
     return maxLen;
 };
 
@@ -231,4 +230,130 @@ var myAtoi = function (s) {
     return Math.min(Math.max(num, min), max);
 };
 //"21474836460", "21474836460" "00000-42a1234" "   -42" ".1" "  0000000000012345678"
-console.log(myAtoi("  -0000000000012345678"));
+// console.log(myAtoi("  -0000000000012345678"));
+
+var NaiveMaxArea = function (heights) {
+    let maxVolume = 0;
+    const len = heights.length - 1;
+
+    for (let i = 0; i < len; i++) {
+        for (let j = i + 1; j <= len; j++) {
+            let height = Math.min(heights[i], heights[j]);
+            let width = j - i;
+            let volume = height * width;
+            maxVolume = Math.max(volume, maxVolume);
+            if (volume === 56) console.log("i: ",
+                i, "j: ", j, "width: ", width, "height: ", height);
+
+        }
+    }
+    return maxVolume;
+};
+
+var maxArea = function (height) {
+    let maxVolume = 0;
+    let left = 0;
+    let right = height.length - 1;
+    while (left < right) {
+        let width = right - left;
+        let depth = Math.min(height[left], height[right]);
+        let volume = width * depth;
+        maxVolume = Math.max(maxVolume, volume);
+        if (height[left] < height[right]) {
+            left += 1;
+        } else {
+            right -= 1;
+        }
+    }
+    return maxVolume;
+};
+
+// console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+
+    /* 3 cases
+    1. first digit is a 1 or 5 etc...
+        string += numerals["500"]
+    2. first digit is a 2, 3
+        repeat numeral n times
+        number/digit[0], repeat X digit[0]
+        ex: "300", 300/3 --> 100. (string += numerals["100"]) x 3
+    3. first digit is 6,7,8
+        ex: "600", "600" - "500", string+=numerals["500"],
+            then (string += numerals["100"]) x 1;
+    4. first digit is 4 or 9
+        string += nextNumeralUp + numeralDown;
+        ex: "400" --> numerals["400"/4] + numerals["400" + "400"/4]
+    */
+
+var NaiveIntToRoman = function(num) {
+    const numerals = {
+        "1": "I",
+        "5": "V",
+        "10": "X",
+        "50": "L",
+        "100": "C",
+        "500": "D",
+        "1000": "M"
+    }
+    const numString = String(num);
+    let numeral = "";
+
+    for (let i = 0; i < numString.length; i++) {
+        let digitsStr = numString[i]; // ex "2000";
+        while (digitsStr.length < numString.length - i) { digitsStr += "0";}
+        let currentNumber = Number(digitsStr);
+        let firstDigit = Number(digitsStr[0])
+
+        if (firstDigit === 1 || firstDigit === 5) {
+            numeral += numerals[digitsStr];
+
+        } else if (firstDigit === 2 || firstDigit === 3) {
+            let n = currentNumber/firstDigit;
+            numeral += numerals[String(n)].repeat(firstDigit);
+
+        } else if (firstDigit >= 6 && firstDigit <= 8) {
+            let n = currentNumber / firstDigit;
+            let r = firstDigit - 5;
+            numeral += numerals[String(n * 5)] + numerals[n].repeat(r);
+
+        } else if (firstDigit === 4 || firstDigit === 9) {
+            let n = currentNumber / firstDigit;
+            numeral += numerals[String(n)] + numerals[String(currentNumber + n)]
+        }
+    }
+    return numeral;
+};
+
+/**
+ * I Stole this one from LeetCode b/c it's pretty :), and also the best possible
+ * answer. Makes use of array.every()
+ */
+ var intToRoman = function(num) {
+    const m = [
+        { symbol: 'M', value: 1000 },
+        { symbol: 'CM', value: 900 },
+        { symbol: 'D', value: 500 },
+        { symbol: 'CD', value: 400 },
+        { symbol: 'C', value: 100 },
+        { symbol: 'XC', value: 90 },
+        { symbol: 'L', value: 50 },
+        { symbol: 'XL', value: 40 },
+        { symbol: 'X', value: 10 },
+        { symbol: 'IX', value: 9 },
+        { symbol: 'V', value: 5 },
+        { symbol: 'IV', value: 4 },
+        { symbol: 'I', value: 1 },
+    ];
+
+    let roman = '';
+    m.every(({ symbol, value }) => {
+        roman += symbol.repeat(Math.floor(num/value));
+        num %= value;
+        console.log(num % value)
+        return num > 0 ? true : false;
+    });
+
+    return roman;
+};
+
+intToRoman(58)
