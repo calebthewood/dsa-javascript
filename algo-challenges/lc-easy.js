@@ -91,6 +91,7 @@ function removeDuplicates(nums) {
     return start;
 };
 
+/***************************************************** Easy: Two Sum */
 /**
  * Notes:
  * - nums not sorted
@@ -100,13 +101,13 @@ function removeDuplicates(nums) {
  * @param {number} target
  * @return {number[]}
  */
- var NaiveTwoSum = function(nums, target) {
+var NaiveTwoSum = function (nums, target) {
     const len = nums.length - 1;
     let left = 0;
     let right = 1;
 
     while (left < len) {
-        let sum  = nums[left] + nums[right];
+        let sum = nums[left] + nums[right];
         if (sum === target) {
             return [left, right];
         } else if (right === len) {
@@ -145,29 +146,30 @@ function twoSum(nums, target) {
     }
 };
 
+/*************************************************** Easy: Longest Substring */
 /**
  * Time Complexity: O(n^2)
  * Space Space Complexity: O(n)
  *
  * Approach: Nested for loop
  */
-var naiveLengthOfLongestSubstring = function(s) {
+var naiveLengthOfLongestSubstring = function (s) {
     let maxLen = 0;
-    let len = s.length
+    let len = s.length;
     let set = new Set();
 
     for (let i = 0; i < len; i++) {
         for (let j = i; j < len; j++) {
             if (!set.has(s[j])) {
                 set.add(s[j]);
-                maxLen = Math.max(maxLen, set.size)
+                maxLen = Math.max(maxLen, set.size);
             } else {
                 set.clear();
                 break;
             }
         }
     }
-    return maxLen
+    return maxLen;
 };
 
 /**
@@ -176,9 +178,9 @@ var naiveLengthOfLongestSubstring = function(s) {
  *
  * Approach: Sliding Window
  */
-var lengthOfLongestSubstring = function(s) {
+var lengthOfLongestSubstring = function (s) {
     let maxLen = 0;
-    let len = s.length
+    let len = s.length;
     let i = 0;
     let j = 0;
     let set = new Set();
@@ -186,7 +188,7 @@ var lengthOfLongestSubstring = function(s) {
     while (j < len) {
         if (!set.has(s[j])) {
             set.add(s[j]);
-            maxLen = Math.max(maxLen, set.size)
+            maxLen = Math.max(maxLen, set.size);
             j++;
         } else {
             set.delete(s[i]);
@@ -194,5 +196,39 @@ var lengthOfLongestSubstring = function(s) {
         }
     }
 
-    return maxLen
+    return maxLen;
 };
+
+/**
+ * Time Complexity: O(n)
+ * Space Space Complexity: O(n)
+ *
+ * Approach: Nothing special
+ */
+var myAtoi = function (s) {
+    s = s.trim();
+    const digits = new Set(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]);
+
+    let number = "";
+    for (let i = 0; i < s.length; i++) {
+        let char = s[i];
+        if (digits.has(char)) {
+            if (char === "0" && number.length > 0) {
+                number += char;
+            } else {
+                number += char;
+            }
+        } else if (i === 0 && (char === "+" || char === "-")) {
+            number += char;
+        } else {
+            break;
+        }
+    }
+    if (number.length === 1 && !digits.has(number)) return 0;
+    const max = 2147483647;
+    const min = -2147483648;
+    const num = Number(number);
+    return Math.min(Math.max(num, min), max);
+};
+//"21474836460", "21474836460" "00000-42a1234" "   -42" ".1" "  0000000000012345678"
+console.log(myAtoi("  -0000000000012345678"));
