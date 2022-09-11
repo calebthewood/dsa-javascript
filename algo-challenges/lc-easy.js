@@ -356,4 +356,25 @@ var NaiveIntToRoman = function(num) {
     return roman;
 };
 
-intToRoman(58)
+var threeSum = function(nums) {
+    let i = 0;
+    let j = nums.length-1;
+    let k = 1;
+    let movingLeft = true;
+    const len = Math.floor(nums.length / 2);
+    const output = [];
+
+    while (i < len) {
+        let left = nums[i];
+        let mid = nums[j];
+        let right = nums[k];
+        if (left + mid + right === 0) output.push([i,j,k]);
+
+        /*
+        1. mid++
+        2. mid--
+        3. left++ && l
+        4. right-- && mid --
+        */
+    }
+};
