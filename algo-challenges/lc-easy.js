@@ -344,7 +344,6 @@ var NaiveIntToRoman = function(num) {
         { symbol: 'IV', value: 4 },
         { symbol: 'I', value: 1 },
     ];
-
     let roman = '';
     m.every(({ symbol, value }) => {
         roman += symbol.repeat(Math.floor(num/value));
@@ -352,7 +351,6 @@ var NaiveIntToRoman = function(num) {
         console.log(num % value)
         return num > 0 ? true : false;
     });
-
     return roman;
 };
 
