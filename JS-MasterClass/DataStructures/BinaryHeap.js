@@ -24,33 +24,30 @@ class MaxBinaryHeap {
   extractMax() {
     if (!this.values) return;
     let max = this.values[0];
-    let min = this.values.pop();
-    if (this.values.length > 0) {
-      this.values[0] = min;
-    }
+    let element = this.values.pop();
+    const len = this.values.length;
+    if (len > 0) this.values[0] = element;
 
     let parent = 0;
-    let childL = (2 * parent) + 1;
-    let childR = (2 * parent) + 2;
-    let child = this.values[childL] > this.values[childR] ? childL : childR;
-
+    let childL = (2 * parent) + 1 < len ? (2 * parent) + 1 : -1;
+    let childR = (2 * parent) + 2 < len ? (2 * parent) + 2 : -1;
+    let child = this.values[childL] >= this.values[childR] ? childL : childR;
     // bubble down!
     while (this.values[parent] < this.values[child]) {
-      let parentVal = this.values[parent];
       this.values[parent] = this.values[child];
-      this.values[child] = parentVal;
+      this.values[child] = element;
 
       parent = child;
-      childL = this.values[(2 * parent) + 1];
-      childR = this.values[(2 * parent) + 2];
-      child = Math.max(childL, childR);
+      childL = (2 * parent) + 1 < len ? (2 * parent) + 1 : -1;
+      childR = (2 * parent) + 2 < len ? (2 * parent) + 2 : -1;
+      child = this.values[childL] >= this.values[childR] ? childL : childR;
     }
     return max;
   }
 
 }
 
-
+// console.log("P: ", this.values[parent], "LC: ", this.values[childL], "RC: ", this.values[childR]);
 let maxHeap = new MaxBinaryHeap();
 maxHeap.insert(1);
 maxHeap.insert(10);
@@ -59,16 +56,15 @@ maxHeap.insert(9);
 maxHeap.insert(3);
 maxHeap.insert(4);
 maxHeap.insert(8);
-console.log(maxHeap.extractMax());
-console.log(maxHeap.values);
 maxHeap.insert(100);
 maxHeap.insert(98);
 console.log(maxHeap.extractMax());
-console.log(maxHeap.values);
 console.log(maxHeap.extractMax());
 console.log(maxHeap.extractMax());
-console.log(maxHeap.values);
 console.log(maxHeap.extractMax());
-console.log(maxHeap.values);
 console.log(maxHeap.extractMax());
-console.log(maxHeap.values);
+console.log(maxHeap.extractMax());
+console.log(maxHeap.extractMax());
+console.log(maxHeap.extractMax());
+console.log(maxHeap.extractMax());
+console.log(maxHeap.extractMax());
