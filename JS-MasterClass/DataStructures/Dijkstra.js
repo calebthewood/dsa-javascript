@@ -104,16 +104,14 @@ class WeightedGraph {
     return [distances, nodes, previous];
   }
 
-  /* vertex = {val: "A", priority: 5} */
   dijkstrasPath(start, end) {
     const [distances, nodes, previous] = this._initializeDijkstraRefs(start);
-    const path = []; //variable to be returned
+    const path = [];
     let smallest;
 
     while (nodes.values.length) {
       smallest = nodes.dequeue().val;
       if (smallest === end) {
-        //done, build path to return
         while (previous[smallest]) {
           path.push(smallest);
           smallest = previous[smallest];
@@ -127,17 +125,13 @@ class WeightedGraph {
           let prospect = distances[smallest] + nextNode.weight;
           let nextNeighbor = nextNode.node;
           if (prospect < distances[nextNeighbor]) {
-            // updating new smallest distance to neighbor
             distances[nextNeighbor] = prospect;
-            // updating previous, how we got to neighbor
             previous[nextNeighbor] = smallest;
-            // enqueue in priority queue with new priority
             nodes.enqueue(nextNeighbor, prospect);
           }
         }
       }
     }
-    // Need to add starting value, then reverse for start-end sequence.
     return path.concat(smallest).reverse();
   }
 }

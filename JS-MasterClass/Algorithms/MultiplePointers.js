@@ -18,7 +18,7 @@ function sumZero(arr) {
   return false;
 }
 
-console.log("sumsZero: ", sumZero([-4, -3, -2, -1, 1, 2, 3, 4, 5]));
+// console.log("sumsZero: ", sumZero([-4, -3, -2, -1, 1, 2, 3, 4, 5]));
 
 function countValues(arr) {
   const len = arr.length;
@@ -55,3 +55,26 @@ function betterCountValues(arr) {
   }
   return i + 1;
 }
+
+function countUniqueValues(arr) {
+	const len = arr.length;
+  if (!len) return 0;
+  let i = 0;
+  let j = 1;
+
+  while (j < len) {
+    if (arr[i] === arr[j]) {
+      j += 1;
+    } else {
+      i += 1;
+      arr[i] = arr[j]
+      j += 1;
+    }
+  }
+  return i + 1
+}
+
+console.log(countUniqueValues([1,1,1,1,1,2])); // 2
+console.log(countUniqueValues([1,2,3,4,4,4,7,7,12,12,13])); // 7
+console.log(countUniqueValues([])); // 0
+console.log(countUniqueValues([-2,-1,-1,0,1])); // 4
