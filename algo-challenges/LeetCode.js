@@ -1,4 +1,7 @@
 "use strict";
+
+// NOTE: due to LeetCode's repl, some of these may not run as expected in Node
+
 /***************************************************** Easy: Roman to Integer */
 /**
  * Converts a valid string of roman numerals into an integer.
@@ -375,4 +378,49 @@ var threeSum = function(nums) {
         4. right-- && mid --
         */
     }
+};
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+ var addTwoNumbers = function(l1, l2) {
+    const len = Math.max(l1.length, l2.length);
+    let remainder = 0;
+    let sum = l1.val + l2.val;
+    if (sum > 9) {
+        sum = sum % 10;
+        remainder = 1;
+    } else {
+        remainder = 0;
+    }
+    let output = new ListNode(sum)
+    let node = output;
+    l1 = l1.next;
+    l2 = l2.next;
+
+    while (l1 || l2) {
+        sum = (l1?.val || 0) + (l2?.val || 0) + remainder;
+        console.log(sum)
+        if (sum > 9) {
+            sum = sum % 10;
+            remainder = 1;
+        } else {
+            remainder = 0;
+        }
+        node.next = new ListNode(sum);
+        node = node.next;
+        if (l1) l1 = l1.next;
+        if (l2) l2 = l2.next;
+    }
+    if (remainder) node.next = new ListNode(remainder)
+    return output;
 };

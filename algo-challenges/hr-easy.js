@@ -1,3 +1,6 @@
+"use strict";
+// NOTE: due to LeetCode's repl, some of these may not run as expected in Node
+
 /**
  * Subarray Division - 'birthday'
  * Returns count of subarrays in s that
