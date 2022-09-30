@@ -1,3 +1,5 @@
+// A quick breakdown of 4 common algorithms.
+
 /************************************ Multiple Pointers */
 
 function sumZeroMultiplePointers(arr) {
