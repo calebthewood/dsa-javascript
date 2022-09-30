@@ -82,11 +82,11 @@ function insertionSort(array) {
 /* ***************************************** Merge Sort */
 
 /**
- *  * Time Complexity O(n log n)
+ * Time Complexity O(n log n)
  * Space Complexity O()
  * @param {[Number]} arr1
  * @param {[Number]} arr2
- * @returns {[Number]} Sorted array.
+ * @returns {[Number]} sorted array.
  */
 function merge(arr1, arr2) {
   const output = [];
@@ -125,7 +125,7 @@ function mergeSort(array) {
   let left = mergeSort(array.slice(0, mid));
   let right = mergeSort(array.slice(mid));
   console.log(left);
-  return merge(left, right);
+  return merge(left, right); 
 }
 
 // console.log(mergeSort([9, 7, 5, 5, 1, 3, 2, 4, 6, 8]));
