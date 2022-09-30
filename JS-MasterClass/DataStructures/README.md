@@ -1,5 +1,22 @@
 # Data Structures
 
+This repo contains class based implementations of the following data structures. The purpose was primarily educational, although it'd be fun to put a few of them to use in an application sometime.
+
+[Singly Linked Lists](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#singly-linked-lists)
+
+[Doubly Linked Lists](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#doubly-linked-lists)
+
+[Priority Queue](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#priority-queue)
+
+[Stacks & Queues](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#stacks--queues)
+
+[Trees Basics](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#trees-basics)
+
+[Binary Heap](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#binary-heap)
+
+[Hash Tables](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#hash-tables)
+
+[Graphs](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/DataStructures#graphs)
 ## Singly Linked Lists
 
 ## **➡ 📦 ➡ 📦 ➡**

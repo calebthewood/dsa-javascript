@@ -1,6 +1,14 @@
 # Algorithms
 
-This ReadMe represents my personal notes on the topics.
+This repo contains implementations of the following categories of algorithms in JavaScript.
+
+[Search Algorithms](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/Algorithms#algorithms)
+
+[Naive Sorting Algorithms](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/Algorithms#naive-sorting-algorithms)
+
+[Intermediate Sorting Algorithms](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/Algorithms#intermediate-sorting-algorithms)
+
+[Dijkstra’s Algorithm](https://github.com/calebthewood/dsa-javascript/tree/main/JS-MasterClass/Algorithms#dijkstras-algorithm)
 
 ## Search Algorithms
 

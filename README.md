@@ -1,7 +1,6 @@
 # Data Structures &amp; Algorithms
 
-
-My  programming wiki, with an emphasis on JavaScript. Built to record topics I’ve worked on or studied. This is not intended to be all-encompassing. Rather, it reflects my own experience and notes 🤓
+My  programming wiki, with an emphasis on JavaScript. Built to record topics I’ve worked on or studied. This is still a work in progress, and not intended to be all-encompassing. Rather, it reflects my own experience and notes 🤓 but if you have any helpful notes feel free to open up a ticket.
 
 ## Algorithms
 
