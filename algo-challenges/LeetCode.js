@@ -473,3 +473,65 @@ MinStack.prototype.getMin = function() {
     return min;
 };
 
+
+/* **************************************** Merge Sorted Linked Lists */
+
+/** WIP
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+ var mergeTwoLists = function(list1, list2) {
+    let head = new ListNode();
+    if (!list1 && !list2) return list1;
+    if (!list1) return list2;
+    if (!list2) return list1;
+
+    let l1Node ;
+    let l2Node;
+    let current;
+
+    if (list1?.val > list2?.val) {
+        head = new ListNode(list1.val);
+        l1Node = list1.next;
+        l2Node = list2;
+    } else {
+        head = new ListNode(list2.val);
+        l1Node = list1;
+        l2Node = list2.next;
+    }
+
+    current = head;
+    while (l1Node && l2Node) {
+        if (l1Node.val > l2Node.val) {
+            current.next = l1Node;
+            l1Node = l1Node.next;
+            current = current.next;
+        } else {
+            current.next = l2Node;
+            l2Node = l2Node.next;
+            current = current.next;
+        }
+    }
+
+    while (l1Node) {
+        current.next = l1Node;
+        current = current.next;
+        l1Node = l1Node.next;
+    }
+
+    while (l2Node) {
+        current.next = l2Node;
+        current = current.next;
+        l2Node = l2Node.next;
+    }
+
+    return head;
+};
