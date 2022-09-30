@@ -1,6 +1,6 @@
 "use strict"
 
-/** My Solutuion 2nd Algo Challenge From AWS SDE Interview
+/** My Solution to the 2nd Algo Challenge From AWS SDE Interview
  * The first question had to do with finding the max number of ways
  * you can combine 2 and 4 wheeled vehicles to get to a number. A fairly
  * easy math problem.
