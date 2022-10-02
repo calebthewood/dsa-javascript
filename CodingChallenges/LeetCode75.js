@@ -1,6 +1,6 @@
 "use strict"
 
-/* ##### Day 1 */
+/* #################### Day 1 */
 
 /** Returns an array or running sums relative to the input array
  * @param {number[]} nums
@@ -24,4 +24,55 @@ var runningSum = function(nums) {
       if (sums[i] - nums[i] === sum - sums[i]) return i;
   }
   return -1;
+};
+
+/* #################### Day 2 */
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+ var isIsomorphic = function(s, t) {
+  if (s.length !== t.length) return false;
+  const len = s.length;
+  let sRef = {};
+  let tRef = {};
+  let sChar;
+  let tChar;
+
+  for (let i = 0; i < len; i++) {
+      sChar = s[i], tChar = t[i];
+      if (sChar in sRef && sRef[sChar] !== tChar) {
+          return false;
+      } else if (tChar in tRef && tRef[tChar] !== sChar) {
+          return false;
+      } else {
+          sRef[sChar] = tChar;
+          tRef[tChar] = sChar;
+      }
+  }
+  return true
+};
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+ var isSubsequence = function(s, t) {
+  if (!s.length) return true;
+  const len =  t.length;
+  const fin = s.length - 1;
+  let sIdx = 0;
+  let tIdx = 0;
+
+  while (tIdx < len) {
+      if (s[sIdx] === t[tIdx]) {
+          if (sIdx === fin) return true;
+          sIdx += 1;
+      }
+      tIdx += 1;
+  }
+  return false;
 };
