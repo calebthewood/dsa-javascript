@@ -134,3 +134,31 @@ var mergeTwoLists = function(list1, list2) {
     }
     return head;
 };
+
+/* #################### Day 3 */
+
+/**
+ * Time Complexity: Linear O(n)
+ * Space Complexity: Constant O(1)
+ *
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+ var reverseList = function (head) {
+    if (!head) return head;
+    if (!head.next) return head;
+    let prev = head;
+    let current = head.next;
+    let next = current.next;
+    head.next = null;
+
+    while (next) {
+        current.next = prev;
+        prev = current
+        current = next;
+        next = next.next;
+    }
+
+    current.next = prev
+    return current;
+};
