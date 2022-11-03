@@ -163,7 +163,7 @@ var reverseList = function (head) {
     return current;
 };
 
-
+/* #################### Day 4 */
 /**
  * Time Complexity: Linear O(n)
  * Space Complexity: Constant O(1)
@@ -191,5 +191,29 @@ var middleNode = function (head) {
     return current;
 };
 
+/* #################### Day 5 */
 
+/**
+ *
+ * Time Complexity: Linear, O(n)
+ * Space Complexity: Linear, O(n)
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+ var detectCycle = function (head) {
+    if (!head) return null;
+    if (!head.next) return null;
+    const visited = new Set();
+    let current = head;
+
+    while (current) {
+        if (visited.has(current)) {
+            return current;
+        } else {
+            visited.add(current);
+            current = current.next;
+        }
+    }
+    return null;
+};
 
