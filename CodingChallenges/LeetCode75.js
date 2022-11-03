@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 /* #################### Day 1 */
 
@@ -6,9 +6,9 @@
  * @param {number[]} nums
  * @return {number}
  */
-var runningSum = function(nums) {
-  let sum = 0;
-  return nums.map(num => sum += num);
+var runningSum = function (nums) {
+    let sum = 0;
+    return nums.map(num => sum += num);
 };
 
 
@@ -17,13 +17,13 @@ var runningSum = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
- var pivotIndex = function(nums) {
-  let sum = 0;
-  let sums = nums.map(num => sum += num);
-  for (let i = 0; i < sums.length; i++) {
-      if (sums[i] - nums[i] === sum - sums[i]) return i;
-  }
-  return -1;
+var pivotIndex = function (nums) {
+    let sum = 0;
+    let sums = nums.map(num => sum += num);
+    for (let i = 0; i < sums.length; i++) {
+        if (sums[i] - nums[i] === sum - sums[i]) return i;
+    }
+    return -1;
 };
 
 /* #################### Day 2 */
@@ -33,26 +33,26 @@ var runningSum = function(nums) {
  * @param {string} t
  * @return {boolean}
  */
- var isIsomorphic = function(s, t) {
-  if (s.length !== t.length) return false;
-  const len = s.length;
-  let sRef = {};
-  let tRef = {};
-  let sChar;
-  let tChar;
+var isIsomorphic = function (s, t) {
+    if (s.length !== t.length) return false;
+    const len = s.length;
+    let sRef = {};
+    let tRef = {};
+    let sChar;
+    let tChar;
 
-  for (let i = 0; i < len; i++) {
-      sChar = s[i], tChar = t[i];
-      if (sChar in sRef && sRef[sChar] !== tChar) {
-          return false;
-      } else if (tChar in tRef && tRef[tChar] !== sChar) {
-          return false;
-      } else {
-          sRef[sChar] = tChar;
-          tRef[tChar] = sChar;
-      }
-  }
-  return true
+    for (let i = 0; i < len; i++) {
+        sChar = s[i], tChar = t[i];
+        if (sChar in sRef && sRef[sChar] !== tChar) {
+            return false;
+        } else if (tChar in tRef && tRef[tChar] !== sChar) {
+            return false;
+        } else {
+            sRef[sChar] = tChar;
+            tRef[tChar] = sChar;
+        }
+    }
+    return true;
 };
 
 /**
@@ -60,21 +60,21 @@ var runningSum = function(nums) {
  * @param {string} t
  * @return {boolean}
  */
- var isSubsequence = function(s, t) {
-  if (!s.length) return true;
-  const len =  t.length;
-  const fin = s.length - 1;
-  let sIdx = 0;
-  let tIdx = 0;
+var isSubsequence = function (s, t) {
+    if (!s.length) return true;
+    const len = t.length;
+    const fin = s.length - 1;
+    let sIdx = 0;
+    let tIdx = 0;
 
-  while (tIdx < len) {
-      if (s[sIdx] === t[tIdx]) {
-          if (sIdx === fin) return true;
-          sIdx += 1;
-      }
-      tIdx += 1;
-  }
-  return false;
+    while (tIdx < len) {
+        if (s[sIdx] === t[tIdx]) {
+            if (sIdx === fin) return true;
+            sIdx += 1;
+        }
+        tIdx += 1;
+    }
+    return false;
 };
 
 /* #################### Day 3 */
@@ -91,13 +91,13 @@ var runningSum = function(nums) {
  * @param {ListNode} list2
  * @return {ListNode}
  */
-var mergeTwoLists = function(list1, list2) {
+var mergeTwoLists = function (list1, list2) {
     let head = new ListNode();
     if (!list1 && !list2) return list1;
     if (!list1) return list2;
     if (!list2) return list1;
 
-    let l1Node ;
+    let l1Node;
     let l2Node;
     let current;
 
@@ -135,7 +135,7 @@ var mergeTwoLists = function(list1, list2) {
     return head;
 };
 
-/* #################### Day 3 */
+/* #################### Day 4 */
 
 /**
  * Time Complexity: Linear O(n)
@@ -144,7 +144,7 @@ var mergeTwoLists = function(list1, list2) {
  * @param {ListNode} head
  * @return {ListNode}
  */
- var reverseList = function (head) {
+var reverseList = function (head) {
     if (!head) return head;
     if (!head.next) return head;
     let prev = head;
@@ -154,11 +154,42 @@ var mergeTwoLists = function(list1, list2) {
 
     while (next) {
         current.next = prev;
-        prev = current
+        prev = current;
         current = next;
         next = next.next;
     }
 
-    current.next = prev
+    current.next = prev;
     return current;
 };
+
+
+/**
+ * Time Complexity: Linear O(n)
+ * Space Complexity: Constant O(1)
+ *
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function (head) {
+    if (!head) return [];
+    if (!head.next) return head;
+    let length = 1;
+    let current = head.next;
+
+    while (current) {
+        length += 1;
+        current = current.next;
+    }
+    let mid = Math.floor(length / 2);
+    current = head;
+
+    while (mid > 0) {
+        mid -= 1;
+        current = current.next;
+    }
+    return current;
+};
+
+
+
