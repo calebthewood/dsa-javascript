@@ -221,7 +221,7 @@ var middleNode = function (head) {
 
 /**
  * Time Complexity: Linear, O(n)
- * Space Complexity: Constant O(1)
+ * Space Complexity: Constant, O(1)
  *
  * @param {number[]} prices
  * @return {number}
@@ -277,4 +277,27 @@ var middleNode = function (head) {
     }
     if (odds > 0) return palindromeLen + 1;
     return palindromeLen;
+};
+
+/* #################### Day 7 */
+
+/**
+ * Time Complexity: Linear, O(n)
+ * Space Complexity: Linear, O(n)
+ *
+ * @param {Node|null} root
+ * @return {number[]}
+ */
+ var preorder = function (root) {
+    const visited = [];
+    function traverse(node) {
+        if (node) {
+            visited.push(node.val);
+            if (node.children) {
+                node.children.forEach(child => traverse(child))
+            }
+        }
+    }
+    traverse(root);
+    return visited
 };
