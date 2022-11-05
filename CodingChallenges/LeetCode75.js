@@ -217,3 +217,64 @@ var middleNode = function (head) {
     return null;
 };
 
+/* #################### Day 6 */
+
+/**
+ * Time Complexity: Linear, O(n)
+ * Space Complexity: Constant O(1)
+ *
+ * @param {number[]} prices
+ * @return {number}
+ */
+ var maxProfit = function (prices) {
+    const len = prices.length;
+    let minPrice = Infinity;
+    let maxProfit = 0;
+    let price;
+
+    for (let i = 0; i < len; i++) {
+        price = prices[i];
+        if (price < minPrice) {
+            minPrice = price;
+        } else if (price - minPrice > maxProfit) {
+            maxProfit = price - minPrice;
+        }
+    }
+    return maxProfit;
+};
+
+/**
+ * Time Compelexity: Linear, O(n)
+ * Space Compelexity: Constant, O(1) - b/c characters limited to 26.
+ *
+ * @param {string} s
+ * @return {number}
+ */
+ var longestPalindrome = function (s) {
+    const charFreqs = {}
+    palindromeLen = 0;
+    odds = 0;
+
+    for (let char of s) {
+        if (char in charFreqs) {
+            charFreqs[char] = charFreqs[char] + 1;
+        } else {
+            charFreqs[char] = 1
+        }
+    }
+    const counts = Object.values(charFreqs)
+    if (counts.length === 1) return s.length;
+
+    for (let count of counts) {
+        if (count % 2 === 0) {
+            palindromeLen += count;
+        } else if (count > 1){
+            palindromeLen += count - 1;
+            odds += 1;
+        } else {
+            odds += 1;
+        }
+    }
+    if (odds > 0) return palindromeLen + 1;
+    return palindromeLen;
+};
