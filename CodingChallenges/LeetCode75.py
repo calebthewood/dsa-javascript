@@ -79,3 +79,19 @@ def isSubsequence(s, t):
     if i >= len(s):
         return True
     return False
+
+def isSubsequenceRecursive(s, t):
+    """
+    :type s: str
+    :type t: str
+    :rtype: bool
+    """
+
+    if len(s) == 0:
+        return True
+    elif len(t) == 0:
+        return False
+    elif s[0] == t[0]:
+        return self.isSubsequence(s[1:], t[1:])
+    else:
+        return self.isSubsequence(s, t[1:])
