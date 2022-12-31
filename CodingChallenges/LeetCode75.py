@@ -62,3 +62,20 @@ def isIsomorphic(self, s, t):
             t_map[t_char] = s_char
     return True
 
+# 392. Is Subsequence
+def isSubsequence(s, t):
+    """
+    :type s: str
+    :type t: str
+    :rtype: bool
+    """
+    i = 0
+    for char in t:
+        if i >= len(s):
+            return True
+        if char == s[i]:
+            i += 1
+
+    if i >= len(s):
+        return True
+    return False
