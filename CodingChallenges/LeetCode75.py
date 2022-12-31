@@ -35,3 +35,30 @@ def pivotIndex(nums):
         if left_sum == right_sum:
             return i
     return -1
+
+# Day 2
+
+# 205. Isomorphic Strings
+def isIsomorphic(self, s, t):
+    """
+    :type s: str
+    :type t: str
+    :rtype: bool
+    """
+    s_len = len(s)
+    t_len = len(t)
+    if s_len != t_len: return False
+    s_map = dict()
+    t_map = dict()
+    for i in range(0,s_len):
+        s_char = s[i]
+        t_char = t[i]
+        if s_char in s_map and s_map[s_char] != t_char:
+            return False
+        elif t_char in t_map and t_map[t_char] != s_char:
+            return False
+        else:
+            s_map[s_char] = t_char
+            t_map[t_char] = s_char
+    return True
+
