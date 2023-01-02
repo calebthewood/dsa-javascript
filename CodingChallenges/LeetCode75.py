@@ -1,4 +1,5 @@
-# Day 1
+# Leet Code 75 Challenge
+###################################################### Day 1
 
 # 1480. Running Sum of 1d Array
 def runningSum(nums):
@@ -36,7 +37,7 @@ def pivotIndex(nums):
             return i
     return -1
 
-# Day 2
+###################################################### Day 2
 
 # 205. Isomorphic Strings
 def isIsomorphic(self, s, t):
@@ -95,3 +96,54 @@ def isSubsequenceRecursive(s, t):
         return self.isSubsequence(s[1:], t[1:])
     else:
         return self.isSubsequence(s, t[1:])
+
+###################################################### Day 3
+
+# 206. Reverse Linked List
+def reverseList(head):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    """
+    if not head: return head
+    if not head.next: return head
+    # Set previous, current, and next values
+    tail_node = head
+    current_node= head.next
+    next_node = current_node.next
+    tail_node.next = None
+    # Reverse body of the list
+    while next_node:
+        current_node.next = tail_node
+        tail_node = current_node
+        current_node = next_node
+        next_node = next_node.next
+    # Reverse final node, the new head
+    current_node.next = tail_node
+
+    return current_node
+
+
+# 206. Reverse Linked List
+def reverseList(shead):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    """
+    if not head: return head
+    if not head.next: return head
+    # Set previous, current, and next values
+    tail_node = head
+    current_node= head.next
+    next_node = current_node.next
+    tail_node.next = None
+    # Reverse body of the list
+    while next_node:
+        current_node.next = tail_node
+        tail_node = current_node
+        current_node = next_node
+        next_node = next_node.next
+    # Reverse final node, the new head
+    current_node.next = tail_node
+
+    return current_node
