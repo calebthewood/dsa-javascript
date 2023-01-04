@@ -147,3 +147,66 @@ def reverseList(shead):
     current_node.next = tail_node
 
     return current_node
+
+###################################################### Day 4
+
+def middleNodeFast(head):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    """
+    # basic edge cases
+    if not head: return head
+    if not head.next: return head
+    # init 2 pointers
+    fast_node = head
+    slow_node = head
+    # fast node will move 2x slow nodes
+    while fast_node:
+        fast_node = fast_node.next
+        if fast_node:
+            slow_node = slow_node.next
+            fast_node = fast_node.next
+    # slow node has moved half the distance of fast node
+    return slow_node
+
+def middleNodeList(head):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    """
+    # Basic edge cases
+    if not head: return head
+    if not head.next: return head
+    nodes = []
+    # Create list of nodes
+    current_node = head
+    while current_node:
+        nodes.append(current_node)
+        current_node = current_node.next
+    # Return node in middle of list
+    mid = len(nodes)//2
+    return nodes[mid]
+
+def middleNodeBrute(head):
+    """
+    :type head: ListNode
+    :rtype: ListNode
+    """
+    # Basic edge cases
+    if not head: return head
+    if not head.next: return head
+    # Move through entire list to find length
+    length = 0
+    current_node = head
+    while current_node:
+        length += 1
+        current_node = current_node.next
+    # Start over, and move to halfway point
+    term = length//2
+    current_node = head
+    while term > 0:
+        term -= 1
+        current_node = current_node.next
+
+    return current_node
