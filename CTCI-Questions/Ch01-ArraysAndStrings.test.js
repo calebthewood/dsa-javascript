@@ -1,55 +1,52 @@
-const { isUnique, checkPermutation } = require("./Ch01-ArraysAndStrings");
+const { isUnique, checkPermutation, urlify } = require("./Ch01-ArraysAndStrings");
 
 describe("1.1 isUnique Function", () => {
   test("Should return true if all characters in a string are unique", () => {
-    let result = isUnique("string");
-    expect(result).toEqual(true);
+    expect(isUnique("string")).toEqual(true);
   });
-
   test("Should return false if string contains duplicate chars", () => {
-    let result = isUnique("collateral");
-    expect(result).toEqual(false);
+    expect(isUnique("collateral")).toEqual(false);
   });
-
   test("Should return true if string empty", () => {
-    let result = isUnique("");
-    expect(result).toEqual(true);
+    expect(isUnique("")).toEqual(true);
   });
-
   test("Should work with string of numbers", () => {
-    let result = isUnique("1234567891");
-    expect(result).toEqual(false);
+    expect(isUnique("1234567891")).toEqual(false);
   });
 });
 
 describe("1.2 checkPermutation Function", () => {
   test("Should return true if strings are permutations", () => {
-    let result = checkPermutation("string", "gritsn");
-    expect(result).toEqual(true);
+    expect(checkPermutation("string", "gritsn")).toEqual(true);
   });
-
   test("Should return false if strings are different lengths", () => {
-    let result = checkPermutation("collateral", "phoebe");
-    expect(result).toEqual(false);
+    expect(checkPermutation("collateral", "phoebe")).toEqual(false);
   });
-
   test("Should return true if strings empty", () => {
-    let result = checkPermutation("","");
-    expect(result).toEqual(true);
+    expect(checkPermutation("","")).toEqual(true);
   });
-
   test("Should work with strings of numbers", () => {
-    let result = checkPermutation("123456789", "123456789");
-    expect(result).toEqual(true);
+    expect(checkPermutation("123456789", "123456789")).toEqual(true);
   });
-
-  test("Should work with similar strings", () => {
-    let result = checkPermutation("garbage", "garbaga");
-    expect(result).toEqual(false);
+  test("Should work with when last char varies", () => {
+    expect(checkPermutation("garbage", "garbaga")).toEqual(false);
   });
+  test("Should work with with char in a not in b", () => {
+    expect(checkPermutation("tacocat", "tacicat")).toEqual(false);
+  });
+});
 
-  test("Should work with similar strings", () => {
-    let result = checkPermutation("tacocat", "tacicat");
-    expect(result).toEqual(false);
+describe("1.3 URLify Function", () => {
+  test("Should replace spaces and ignore trailing whitespace", () => {
+    expect(urlify("Mr John Smith     ")).toEqual("Mr%20John%20Smith");
+  });
+  test("Should make no changes if no spaces", () => {
+    expect(urlify("thisUrlHasNoSpace")).toEqual("thisUrlHasNoSpace");
+  });
+  test("Should return empty string if only spaces", () => {
+    expect(urlify("")).toEqual("");
+  });
+  test("Should work with strings of numbers", () => {
+    expect(urlify("12 34 56 789 ")).toEqual("12%2034%2056%20789");
   });
 });

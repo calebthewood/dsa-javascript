@@ -46,4 +46,41 @@ function checkPermutation(stringA, stringB) {
   return true;
 }
 
-module.exports = { isUnique, checkPermutation };
+/** 1.3 URLify.
+ * Replace all spaces in a string with %20
+ * Approaches -> I'd argue #1 is best for JS, but #2 is more language agnostic.
+ *  Time O(n), SpaceO(n)
+ * 1) Use js method .replaceAll()
+ * 2) Build new string from old string
+ *    - Trim trailing white space (assumes no other whitespace)
+ *    - Iterate over input with trimmed length
+ *      - concat char or '%20' to url string
+ *    - return url string
+ * 3) Use array .split(" ").join("%20")
+ * 4) Convert to array, manually iterate and change spaces
+ * */
+function urlify(string) {
+  let url = "";
+  const len = findTrueLength(string);
+  for (let i = 0; i < len; i++) {
+    url += string[i] === " " ? "%20" : string[i];
+  }
+  return url;
+}
+
+/** Helper to 1.3 finds length excluding trailing whitespaces
+ *  JS has a trim method, but I'm trying to be language agnostic here
+ */
+function findTrueLength(string) {
+  if (!string.length) return 0;
+  const len = string.length - 1;
+  // i represents true length of string
+  for (let i = len; i >= 0; i--) {
+    if (string[i] !== " ") {
+      return i + 1;
+    }
+  }
+  return i;
+}
+
+module.exports = { isUnique, checkPermutation, urlify };
