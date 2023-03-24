@@ -21,4 +21,29 @@ function isUnique(string) {
   }
   return true;
 }
-// console.log(isUnique("string"))
+
+/** 1.2 Check Permutation
+ * Given two strings, write a method to decide if one is a permutation of the other.
+ * Approaches -> Time O(n), Space O(n)
+ * 1) build 2 freqCounter, compare them
+ *    - create freqA & freqB,
+ *    - iterate over freqA
+ *      - if no match, fail
+ *     - win at end
+ */
+function checkPermutation(stringA, stringB) {
+  if (stringA.length !== stringB.length) return false;
+  const freqsA = {};
+  const freqsB = {};
+  for (let char of stringA) freqsA[char] = freqsA[char] + 1 || 1;
+  for (let char of stringB) freqsB[char] = freqsB[char] + 1 || 1;
+
+  for (let char in freqsA) {
+    if (freqsA[char] !== freqsB[char]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = { isUnique, checkPermutation };
