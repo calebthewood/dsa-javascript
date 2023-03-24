@@ -83,4 +83,28 @@ function findTrueLength(string) {
   return i;
 }
 
-module.exports = { isUnique, checkPermutation, urlify };
+/** 1.4 Palindrome Permutation
+ * Given a string, write a function to check if it is a permutation of a palindrome.
+ * Approaches -> Time O(n), Space O(n)
+ * 1) create freqCounter, check freqs, if >1 odd, fail, else pass
+ */
+function palindromePermutation(string) {
+  const freqs = {};
+  let oddCount = 0;
+  for (let char of string.toLowerCase()) {
+    if ('abcdefghijklmnopqrstuvwxyz'.includes(char)) {
+      freqs[char] = freqs[char] + 1 || 1;
+    }
+  }
+  for (let char in freqs) {
+    if (freqs[char] % 2 !== 0) {
+      oddCount += 1;
+      if (oddCount > 1) {
+        return false;
+      }
+    }
+  }
+  return oddCount <= 1;
+}
+
+module.exports = { isUnique, checkPermutation, urlify, palindromePermutation };

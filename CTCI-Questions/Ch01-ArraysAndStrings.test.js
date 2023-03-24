@@ -1,4 +1,4 @@
-const { isUnique, checkPermutation, urlify } = require("./Ch01-ArraysAndStrings");
+const { isUnique, checkPermutation, urlify, palindromePermutation } = require("./Ch01-ArraysAndStrings");
 
 describe("1.1 isUnique Function", () => {
   test("Should return true if all characters in a string are unique", () => {
@@ -23,7 +23,7 @@ describe("1.2 checkPermutation Function", () => {
     expect(checkPermutation("collateral", "phoebe")).toEqual(false);
   });
   test("Should return true if strings empty", () => {
-    expect(checkPermutation("","")).toEqual(true);
+    expect(checkPermutation("", "")).toEqual(true);
   });
   test("Should work with strings of numbers", () => {
     expect(checkPermutation("123456789", "123456789")).toEqual(true);
@@ -48,5 +48,23 @@ describe("1.3 URLify Function", () => {
   });
   test("Should work with strings of numbers", () => {
     expect(urlify("12 34 56 789 ")).toEqual("12%2034%2056%20789");
+  });
+});
+
+describe("1.4 Palindrome Permutation", () => {
+  test("Should should return true if string is palindrom", () => {
+    expect(palindromePermutation("tacocat")).toEqual(true);
+  });
+  test("Should return true if palindrom has space", () => {
+    expect(palindromePermutation("taco cat")).toEqual(true);
+  });
+  test("Should return true if permutation of palidrome", () => {
+    expect(palindromePermutation("atco cat")).toEqual(true);
+  });
+  test("Should return false if not a permutation of palindrome", () => {
+    expect(palindromePermutation("George")).toEqual(false);
+  });
+  test("Should ignore no alphabetic characters", () => {
+    expect(palindromePermutation("ta!coc^a8t")).toEqual(true);
   });
 });
