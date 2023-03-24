@@ -1,6 +1,13 @@
 # Data Structures &amp; Algorithms
 
-My  programming wiki, with an emphasis on JavaScript. Built to record topics I’ve worked on or studied. This is still a work in progress, and not intended to be all-encompassing. Rather, it reflects my own experience and notes 🤓 but if you have any helpful notes feel free to open up a ticket.
+This repo contains algorithms, data structures, and coding challenges organized by source (tutorials, leetcode, Cracking the Coding Interview, etc). For now, most solutions will be in JavaScript. I'm currently working my way through Cracking the Coding Interview and using Jest to unit test solutions locally.
+
+## Sources
+- Cracking The Coding Interview (6% - active)
+- Rithm School's DSA week (100% - 2022)
+- Colt Steele's JavaScript Masterclass (100% - 2022)
+- HackerRank (paused)
+- LeetCode (paused)
 
 ## Algorithms
 
