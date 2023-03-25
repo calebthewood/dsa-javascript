@@ -1,4 +1,4 @@
-const { isUnique, checkPermutation, urlify, palindromePermutation } = require("./Ch01-ArraysAndStrings");
+const { isUnique, checkPermutation, urlify, palindromePermutation, oneAway } = require("./Ch01-ArraysAndStrings");
 
 describe("1.1 isUnique Function", () => {
   test("Should return true if all characters in a string are unique", () => {
@@ -66,5 +66,20 @@ describe("1.4 Palindrome Permutation", () => {
   });
   test("Should ignore no alphabetic characters", () => {
     expect(palindromePermutation("ta!coc^a8t")).toEqual(true);
+  });
+});
+
+describe("1.5 One Away", () => {
+  test("Should return true if one insert/delete away", () => {
+    expect(oneAway("pale","ple")).toEqual(true);
+  });
+  test("Should return true if one insert/delete away", () => {
+    expect(oneAway("pales","pale")).toEqual(true);
+  });
+  test("Should return true if one replace away", () => {
+    expect(oneAway("pale","bale")).toEqual(true);
+  });
+  test("Should return false if 2 replace away", () => {
+    expect(oneAway("pale","bake")).toEqual(false);
   });
 });

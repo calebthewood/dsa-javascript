@@ -97,6 +97,9 @@ function findTrueLength(string) {
 
 /** 1.4 Palindrome Permutation
  * Given a string, write a function to check if it is a permutation of a palindrome.
+ * @param {string} string
+ * @returns {boolean} true if string is a permutation of a palindrome
+ *
  * Approaches -> Time O(n), Space O(n)
  * 1) create freqCounter, check freqs, if >1 odd, fail, else pass
  */
@@ -119,4 +122,53 @@ function palindromePermutation(string) {
   return oddCount <= 1;
 }
 
-module.exports = { isUnique, checkPermutation, urlify, palindromePermutation };
+/** 1.5 One Away
+ * Checks whether two strings vary by more than one edit (insert, delete, replace)
+ * @param {string} stringA
+ * @param {string} stringB
+ * @returns {boolean} true if strings vary by 1 or 0 edits
+ *
+ * Approaches -> #1 Time O(n), Space O(n)
+ * 1) If lens ===, check for replacements, else check for deletes
+ * 2) If charA !== charB check delete, then check replace
+ * 3) 2 pointers, if i !== j, check len, move i or j for longer str, ++count, if count> 1 then false
+ *
+ *  3 would be optimal, with linear runtime.
+ */
+function oneAway(stringA, stringB) {
+  if (stringA === stringB) return true;
+  if (stringA.length - stringB.length > 1) return false;
+  // if lengths not equal, check for deletion edit
+  const [long, short] = stringA.length > stringB.length ? [stringA, stringB] : [stringB, stringA];
+  const len = long.length;
+  if (stringA.length !== stringB.length) {
+    for (let i = 0; i < len; i++) {
+      if (long[i] !== short[i]) {
+        let shortened = deleteCharAt(long, i);
+        return shortened === short;
+      }
+    }
+    // if lengths equal, check for replace
+  } else {
+    let count = 0;
+    for (let i = 0; i < len; i++) {
+      if (long[i] !== short[i]) {
+        count += 1;
+        if (count > 1) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+}
+
+function deleteCharAt(string, idx) {
+  let output = "";
+  for (let i = 0; i < string.length; i++) {
+    if (i !== idx) output += string[i];
+  }
+  return output;
+}
+
+module.exports = { isUnique, checkPermutation, urlify, palindromePermutation, oneAway };
