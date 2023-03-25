@@ -1,5 +1,8 @@
 /** 1.1 Is Unique.
  * Determines if a string contains all unique characters.
+ * @param {string} string
+ * @returns {boolean}
+ *
  *  Approaches -> #3 Time: O(n) Space: O(n)
  *  1) Convert to set, compare lengths
  *  2) Create reference var, compare at each char. Fail on match, win at end
@@ -23,6 +26,10 @@ function isUnique(string) {
 }
 
 /** 1.2 Check Permutation
+ * @param {string} stringA
+ * @param {string} stringB
+ * @returns {boolean}
+ *
  * Given two strings, write a method to decide if one is a permutation of the other.
  * Approaches -> Time O(n), Space O(n)
  * 1) build 2 freqCounter, compare them
@@ -48,6 +55,9 @@ function checkPermutation(stringA, stringB) {
 
 /** 1.3 URLify.
  * Replace all spaces in a string with %20
+ * @param {string} name
+ * @returns {string} url
+ *
  * Approaches -> I'd argue #1 is best for JS, but #2 is more language agnostic.
  *  Time O(n), SpaceO(n)
  * 1) Use js method .replaceAll()
@@ -69,6 +79,8 @@ function urlify(string) {
 }
 
 /** Helper to 1.3 finds length excluding trailing whitespaces
+ * @param {string} string
+ * @returns {number} length
  *  JS has a trim method, but I'm trying to be language agnostic here
  */
 function findTrueLength(string) {
