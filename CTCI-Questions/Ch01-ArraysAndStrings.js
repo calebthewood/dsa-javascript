@@ -163,6 +163,12 @@ function oneAway(stringA, stringB) {
   }
 }
 
+/** deleteCharAt
+ * Utility fn for oneAway
+ * @param {string} string string to be modified
+ * @param {number} idx index of the character to be removed
+ * @returns {string} string with character at idx removed
+ */
 function deleteCharAt(string, idx) {
   let output = "";
   for (let i = 0; i < string.length; i++) {
@@ -171,4 +177,63 @@ function deleteCharAt(string, idx) {
   return output;
 }
 
-module.exports = { isUnique, checkPermutation, urlify, palindromePermutation, oneAway };
+/** betterOneAway
+ * taken from:
+ * https://wentao-shao.gitbook.io/leetcode/string/161.one-edit-distance
+ * @param {string} stringA
+ * @param {string} stringB
+ * @returns {boolean} true if strings vary by 1 or 0 edits
+ */
+function betterOneAway(stringA, stringB) {
+  const lenA = stringA.length;
+  const lenB = stringB.length;
+  if (Math.abs(lenA - lenB) > 1) return false;
+  const len = Math.min(lenA, lenB);
+  let idxA = 0;
+  let idxB = 0;
+  while (idxA < len && stringA.charAt(idxA) === stringB.charAt(idxA)) idxA++;
+  while (idxB < len - idxA && stringA.charAt(lenA - 1 - idxB) === stringB.charAt(lenB - 1 - idxB)) idxB++;
+  return lenA + lenB - len - 1 === idxA + idxB;
+}
+
+/** 1.6 String Compression
+ *  Compresses repeated characters in a string. aaabbc -> a3b2c
+ *  @param {string} string
+ *  @returns {string} a string where repeated chars have been compressed
+ *
+ *  Approaches -> Time O(n), Space O(n)
+ *  1) Init 2 pointers, counter at 0, and output var
+ *    - while char at p1 == char at p2, count ++
+ *    - if not,
+ *      - output+= p1 char + count,
+ *      - p1 = p2,
+ *      - start again
+ */
+function stringCompression(string) {
+  let left = 0;
+  let right = 0;
+  let output = "";
+  const len = string.length;
+  let char = string[left];
+
+  while (right <= len) {
+    if (char !== string[right]) {
+      output += char + String(right - left);
+      left = right;
+      char = string[left]
+    }
+    right++;
+  }
+  return output.length > string.length ? string : output;
+}
+
+
+module.exports = {
+  isUnique,
+  checkPermutation,
+  urlify,
+  palindromePermutation,
+  oneAway,
+  betterOneAway,
+  stringCompression
+};

@@ -1,4 +1,12 @@
-const { isUnique, checkPermutation, urlify, palindromePermutation, oneAway } = require("./Ch01-ArraysAndStrings");
+const {
+  isUnique,
+  checkPermutation,
+  urlify,
+  palindromePermutation,
+  oneAway,
+  betterOneAway,
+  stringCompression
+} = require("./Ch01-ArraysAndStrings");
 
 describe("1.1 isUnique Function", () => {
   test("Should return true if all characters in a string are unique", () => {
@@ -71,15 +79,27 @@ describe("1.4 Palindrome Permutation", () => {
 
 describe("1.5 One Away", () => {
   test("Should return true if one insert/delete away", () => {
-    expect(oneAway("pale","ple")).toEqual(true);
+    expect(betterOneAway("pale", "ple")).toEqual(true);
   });
   test("Should return true if one insert/delete away", () => {
-    expect(oneAway("pales","pale")).toEqual(true);
+    expect(betterOneAway("pales", "pale")).toEqual(true);
   });
   test("Should return true if one replace away", () => {
-    expect(oneAway("pale","bale")).toEqual(true);
+    expect(betterOneAway("pale", "bale")).toEqual(true);
   });
   test("Should return false if 2 replace away", () => {
-    expect(oneAway("pale","bake")).toEqual(false);
+    expect(betterOneAway("pale", "bake")).toEqual(false);
+  });
+});
+
+describe("1.6 String Compression", () => {
+  test("Should return same string if no subsequent characters present", () => {
+    expect(stringCompression("abc")).toEqual("abc");
+  });
+  test("Should compress subsequent characters", () => {
+    expect(stringCompression("aaabbc")).toEqual("a3b2c1");
+  });
+  test("Should compress subsequent characters", () => {
+    expect(stringCompression("aaaaabbccc")).toEqual("a5b2c3");
   });
 });
