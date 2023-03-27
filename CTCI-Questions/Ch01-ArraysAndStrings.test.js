@@ -5,7 +5,9 @@ const {
   palindromePermutation,
   oneAway,
   betterOneAway,
-  stringCompression
+  stringCompression,
+  rotateMatrix,
+  zeroMatrix
 } = require("./Ch01-ArraysAndStrings");
 
 describe("1.1 isUnique Function", () => {
@@ -101,5 +103,64 @@ describe("1.6 String Compression", () => {
   });
   test("Should compress subsequent characters", () => {
     expect(stringCompression("aaaaabbccc")).toEqual("a5b2c3");
+  });
+});
+
+const matrixAStart = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+const matrixAEnd = [
+  [7, 4, 1],
+  [8, 5, 2],
+  [9, 6, 3]
+];
+
+const matrixBStart = [
+  [1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10],
+  [11, 12, 13, 14, 15],
+  [16, 17, 18, 19, 20],
+  [21, 22, 23, 24, 25]
+];
+
+const matrixBEnd = [
+  [ 21, 16, 11, 6, 1 ],
+  [ 22, 17, 12, 7, 2 ],
+  [ 23, 18, 13, 8, 3 ],
+  [ 24, 19, 14, 9, 4 ],
+  [ 25, 20, 15, 10, 5 ]
+];
+
+describe("1.7 Rotate Matrix", () => {
+  test("Should rotate a 3x3 matrix", () => {
+    expect(rotateMatrix(matrixAStart)).toEqual(matrixAEnd);
+  });
+  test("Should rotate a 5x5 matrix", () => {
+    expect(rotateMatrix(matrixBStart)).toEqual(matrixBEnd);
+  });
+});
+
+
+const matrix0 = [
+  [1, 2, 3, 4, 5],
+  [6, 0, 8, 9, 10],
+  [11, 12, 13, 14, 15],
+  [16, 17, 18, 0, 20],
+  [21, 22, 23, 24, 25]
+];
+
+const matrix0d = [
+  [1,  0,  3,  0,  5 ],
+  [0,  0,  0,  0,  0 ],
+  [11, 0,  13, 0,  15],
+  [0,  0,  0,  0,  0 ],
+  [21, 0,  23, 0,  25]
+];
+
+describe("1.8 Zero Matrix", () => {
+  test("Should zero-out all rows and columns containing a 0", () => {
+    expect(zeroMatrix(matrix0)).toEqual(matrix0d);
   });
 });

@@ -220,13 +220,90 @@ function stringCompression(string) {
     if (char !== string[right]) {
       output += char + String(right - left);
       left = right;
-      char = string[left]
+      char = string[left];
     }
     right++;
   }
   return output.length > string.length ? string : output;
 }
 
+const matrixStart = [
+  [1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10],
+  [11, 12, 13, 14, 15],
+  [16, 17, 18, 19, 20],
+  [21, 22, 23, 24, 25]
+];
+const matrixEnd = [
+  [7, 4, 1],
+  [8, 5, 2],
+  [9, 6, 3],
+];
+
+/** 1.7 Rotate Matrix
+ * Rotates N X N matrix 90 degrees clockwise, in place.
+ * @param {Array} image
+ * @returns {Array} image rotated by 90 degrees
+ *
+ * Big O: Time O(n) - Space O(n)
+ */
+function rotateMatrix(image) {
+  const rows = image.length;
+  const cols = image[0].length;
+  const output = [];
+  // to rotate counter-clockwise, switch push & unshift.
+  for (let i = 0; i < rows; i++) {
+    let row = [];
+    for (let j = 0; j < cols; j++) {
+      row.push(image[cols - 1 - j][rows - 1 - i]);
+    }
+    output.unshift(row);
+  }
+  return output;
+}
+
+/** 1.8 Zero Matrix
+ *  Zeros out any column or row in in a matrix containing a 0
+ *  @param {Array} matrix
+ *  @returns {Array} matrix modified
+ *
+ *  Big O: Time O(n) - Space O(n)
+ *
+ *  Approach
+ *    iterate thru matrix
+ *      - record x and y for each found 0
+ *    iterate thru matrix
+ *      - if x or y in record, change element to 0
+ */
+function zeroMatrix(matrix) {
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  const xCoords = new Set();
+  const yCoords = new Set();
+  // record 0 locations
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (matrix[y][x] === 0) {
+        xCoords.add(x);
+        yCoords.add(y);
+      }
+    }
+  }
+  // change any element in a row or column with a 0 to 0
+  for (y = 0; y < rows; y++) {
+    for (x = 0; x < cols; x++) {
+      if (xCoords.has(x) || yCoords.has(y)) {
+        matrix[y][x] = 0;
+      }
+    }
+  }
+  return matrix;
+}
+
+/** 1.9 String Rotation
+ *
+ */
+function stringRotation() {}
 
 module.exports = {
   isUnique,
@@ -235,5 +312,7 @@ module.exports = {
   palindromePermutation,
   oneAway,
   betterOneAway,
-  stringCompression
+  stringCompression,
+  rotateMatrix,
+  zeroMatrix
 };
