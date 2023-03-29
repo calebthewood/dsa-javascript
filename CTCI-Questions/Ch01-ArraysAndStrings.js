@@ -301,9 +301,19 @@ function zeroMatrix(matrix) {
 }
 
 /** 1.9 String Rotation
+* Checks if one string is a rotation of another string.
  *
+ * @param {string} str1 - The first string.
+ * @param {string} str2 - The second string.
+ * @returns {boolean} True if str2 is a rotation of str1, false otherwise.
  */
-function stringRotation() {}
+function isStringRotation(s1, s2) {
+  if (s1.length !== s2.length) return false;
+  const s1s1 = s1 + s1;
+  // using .includes method in place of the prompt's 'isSubstring' fn.
+  return s1s1.includes(s2);
+}
+
 
 module.exports = {
   isUnique,
@@ -314,5 +324,6 @@ module.exports = {
   betterOneAway,
   stringCompression,
   rotateMatrix,
-  zeroMatrix
+  zeroMatrix,
+  isStringRotation
 };

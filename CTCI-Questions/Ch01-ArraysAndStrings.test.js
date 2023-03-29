@@ -7,7 +7,8 @@ const {
   betterOneAway,
   stringCompression,
   rotateMatrix,
-  zeroMatrix
+  zeroMatrix,
+  isStringRotation
 } = require("./Ch01-ArraysAndStrings");
 
 describe("1.1 isUnique Function", () => {
@@ -126,11 +127,11 @@ const matrixBStart = [
 ];
 
 const matrixBEnd = [
-  [ 21, 16, 11, 6, 1 ],
-  [ 22, 17, 12, 7, 2 ],
-  [ 23, 18, 13, 8, 3 ],
-  [ 24, 19, 14, 9, 4 ],
-  [ 25, 20, 15, 10, 5 ]
+  [21, 16, 11, 6, 1],
+  [22, 17, 12, 7, 2],
+  [23, 18, 13, 8, 3],
+  [24, 19, 14, 9, 4],
+  [25, 20, 15, 10, 5]
 ];
 
 describe("1.7 Rotate Matrix", () => {
@@ -152,15 +153,33 @@ const matrix0 = [
 ];
 
 const matrix0d = [
-  [1,  0,  3,  0,  5 ],
-  [0,  0,  0,  0,  0 ],
-  [11, 0,  13, 0,  15],
-  [0,  0,  0,  0,  0 ],
-  [21, 0,  23, 0,  25]
+  [1, 0, 3, 0, 5],
+  [0, 0, 0, 0, 0],
+  [11, 0, 13, 0, 15],
+  [0, 0, 0, 0, 0],
+  [21, 0, 23, 0, 25]
 ];
 
 describe("1.8 Zero Matrix", () => {
   test("Should zero-out all rows and columns containing a 0", () => {
     expect(zeroMatrix(matrix0)).toEqual(matrix0d);
+  });
+});
+
+describe("1.9 String Rotation", () => {
+  test("returns true for two empty strings", () => {
+    expect(isStringRotation("", "")).toBe(true);
+  });
+
+  test("returns true for two identical strings", () => {
+    expect(isStringRotation("abc", "abc")).toBe(true);
+  });
+
+  test("returns true for two rotated strings", () => {
+    expect(isStringRotation("waterbottle", "erbottlewat")).toBe(true);
+  });
+
+  test("returns false for two different strings", () => {
+    expect(isStringRotation("abc", "def")).toBe(false);
   });
 });
