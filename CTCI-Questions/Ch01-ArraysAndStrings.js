@@ -1,6 +1,6 @@
 /** 1.1 Is Unique.
  * Determines if a string contains all unique characters.
- * @param {string} string
+ * @param {string} string - a plain string
  * @returns {boolean}
  *
  *  Approaches -> #3 Time: O(n) Space: O(n)
@@ -26,8 +26,8 @@ function isUnique(string) {
 }
 
 /** 1.2 Check Permutation
- * @param {string} stringA
- * @param {string} stringB
+ * @param {string} stringA - the first string
+ * @param {string} stringB - the second string
  * @returns {boolean}
  *
  * Given two strings, write a method to decide if one is a permutation of the other.
@@ -55,7 +55,7 @@ function checkPermutation(stringA, stringB) {
 
 /** 1.3 URLify.
  * Replace all spaces in a string with %20
- * @param {string} name
+ * @param {string} string - a string to be converted to valid url
  * @returns {string} url
  *
  * Approaches -> I'd argue #1 is best for JS, but #2 is more language agnostic.
@@ -97,7 +97,7 @@ function findTrueLength(string) {
 
 /** 1.4 Palindrome Permutation
  * Given a string, write a function to check if it is a permutation of a palindrome.
- * @param {string} string
+ * @param {string} string - potential palindrome
  * @returns {boolean} true if string is a permutation of a palindrome
  *
  * Approaches -> Time O(n), Space O(n)
@@ -124,8 +124,8 @@ function palindromePermutation(string) {
 
 /** 1.5 One Away
  * Checks whether two strings vary by more than one edit (insert, delete, replace)
- * @param {string} stringA
- * @param {string} stringB
+ * @param {string} stringA - the first string
+ * @param {string} stringB - the second string
  * @returns {boolean} true if strings vary by 1 or 0 edits
  *
  * Approaches -> #1 Time O(n), Space O(n)
@@ -165,8 +165,8 @@ function oneAway(stringA, stringB) {
 
 /** deleteCharAt
  * Utility fn for oneAway
- * @param {string} string string to be modified
- * @param {number} idx index of the character to be removed
+ * @param {string} string - string to be modified
+ * @param {number} idx - index of the character to be removed
  * @returns {string} string with character at idx removed
  */
 function deleteCharAt(string, idx) {
@@ -198,7 +198,7 @@ function betterOneAway(stringA, stringB) {
 
 /** 1.6 String Compression
  *  Compresses repeated characters in a string. aaabbc -> a3b2c
- *  @param {string} string
+ *  @param {string} string - A regular string
  *  @returns {string} a string where repeated chars have been compressed
  *
  *  Approaches -> Time O(n), Space O(n)
@@ -242,7 +242,7 @@ const matrixEnd = [
 
 /** 1.7 Rotate Matrix
  * Rotates N X N matrix 90 degrees clockwise, in place.
- * @param {Array} image
+ * @param {Array} image - the original image
  * @returns {Array} image rotated by 90 degrees
  *
  * Big O: Time O(n) - Space O(n)
@@ -313,7 +313,6 @@ function isStringRotation(s1, s2) {
   // using .includes method in place of the prompt's 'isSubstring' fn.
   return s1s1.includes(s2);
 }
-
 
 module.exports = {
   isUnique,
