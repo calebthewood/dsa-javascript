@@ -1,7 +1,18 @@
 /**
  * @class Represents a node in a doubly linked list.
  */
-class Node {
+class NodeS {
+  /**
+   * @constructor Creates a new node with the given value.
+   * @param {*} val - The value to be stored in the node.
+   */
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+class NodeD {
   /**
    * @constructor Creates a new node with the given value.
    * @param {*} val - The value to be stored in the node.
@@ -16,17 +27,17 @@ class Node {
 /**
  * @class Represents a linked list.
  */
-class LinkedList {
+class SinglyLinkedList {
   /**
    * @constructor Creates a new linked list with the given value as the first node.
    * @param {*} val - The value to be stored in the first node.
    */
-  constructor(node) {
+  constructor() {
     /**
     * @type {Node}
     * @default null
     */
-    this.head = node;
+    this.head = null;
     /**
     * @type {Node}
     * @default null
@@ -39,6 +50,30 @@ class LinkedList {
     */
     this.length = 0;
   }
+  /** Prints node list values as an array */
+  print() {
+    const list = [];
+    let current = this.head;
+
+    while (current) {
+      list.push(current.val);
+      current = current.next;
+    }
+    console.log(list);
+  }
+  /** Adds node to end of linked list */
+  push(val) {
+    const node = new NodeS(val);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
+    }
+    this.length += 1;
+    return this;
+  }
 
   /**
    * Deletes a node from the linked list.
@@ -47,27 +82,19 @@ class LinkedList {
    * @returns {Node} - The deleted node, or null if the linked list is empty.
    */
   deleteNode(node) {
-    if (this.head === null) {
-      return null;
-    }
+    if (this.head === null) return null;
+
     if (node === this.head) {
       this.head = this.head.next;
-      if (this.head !== null) {
-        this.head.prev = null;
-      }
       if (this.tail === node) {
         this.tail = null;
       }
     } else {
       let current = this.head.next;
-      while (current !== null) {
+      let prev = this.head;
+      while (current) {
         if (node === current) {
-          current.prev.next = current.next;
-          if (current.next !== null) {
-            current.next.prev = current.prev;
-          } else {
-            this.tail = current.prev;
-          }
+          prev.next = current.next;
           current.next = null;
           current.prev = null;
           break;
@@ -89,28 +116,40 @@ class LinkedList {
     else add it to set and keep moving
     alts to set?? I think the only alternative would involve vastly higher time complexity
     */
-    const nodeVals = new Set();
-    let current = this.head;
+    let prev = this.head;
+    let current = this.head.next;
+    const nodeVals = new Set([prev.val]);
 
     while (current) {
       if (nodeVals.has(current.val)) {
-        let temp = current;
-        current.prev.next = current.next;
-        current.next.prev = current.prev;
+        prev.next = current.next;
         current = current.next;
-        temp.next = null;
-        temp.prev = null;
         this.length--;
       } else {
         nodeVals.add(current.val);
+        prev = current;
         current = current.next;
       }
     }
-    return nodeVals;
+    console.log(nodeVals);
+    return this;
   }
 }
 
+function generateDupLL(n) {
+  const list = new SinglyLinkedList();
+  for (let i = 1; i <= n; i++) {
+    list.push(i);
+    list.push(i);
+  }
+  return list;
+}
+
+// const listA = generateDupLL(20);
+// // listA.print();
+// console.log(listA.length)
+
 module.exports = {
-  LinkedList,
-  Node
+  SinglyLinkedList,
+  generateDupLL,
 };
