@@ -134,22 +134,48 @@ class SinglyLinkedList {
     console.log(nodeVals);
     return this;
   }
+
+  /** 2.2  Return Kth to Last
+   * Returns the kth node from the end of the list.
+   * QUESTION: is the last item 1st from end or 0 from end??
+   */
+  findFromEnd(k) {
+    /*
+    Few Approaches here:
+    1) with this.length, simply count down until we're at the correct node and return it
+    2) Add nodes to array as we go, once we get to the end then return element len - k
+    3) Old fashioned, traverse to end to find len, then traverse again up to len - k
+    4) Recursion, recurse to end, then back up until we're at k. Probs should do for practice.
+    Will assume I can use a recorded length/height and reference that, effect is the same, but simpler to code
+    */
+    // start at head,
+    // set counter = this.length - k
+    // traverse while counter > 0;
+    // return current
+    if (!this.head) return null;
+    let current = this.head;
+    let counter = this.length - k - 1;
+
+    while (counter > 0 && current) {
+      current = current.next;
+      counter --;
+    }
+    return current;
+  }
 }
 
-function generateDupLL(n) {
+function generateLL(n, params = "none") {
   const list = new SinglyLinkedList();
   for (let i = 1; i <= n; i++) {
     list.push(i);
-    list.push(i);
+    if (params === "duplicate") {
+      list.push(i);
+    }
   }
   return list;
 }
 
-// const listA = generateDupLL(20);
-// // listA.print();
-// console.log(listA.length)
-
 module.exports = {
   SinglyLinkedList,
-  generateDupLL,
+  generateLL,
 };
