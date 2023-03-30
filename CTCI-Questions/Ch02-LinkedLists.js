@@ -78,4 +78,11 @@ class LinkedList {
     this.length--;
     return node;
   }
+
+  /** 2.1 Remove Dups
+   *  Removes duplicates from an unsorted linked list.
+   */
+  removeDups() {
+
+  }
 }
