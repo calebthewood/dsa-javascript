@@ -83,6 +83,34 @@ class LinkedList {
    *  Removes duplicates from an unsorted linked list.
    */
   removeDups() {
+    /*
+    keep a set as reference,
+    if set has node val, delete it
+    else add it to set and keep moving
+    alts to set?? I think the only alternative would involve vastly higher time complexity
+    */
+    const nodeVals = new Set();
+    let current = this.head;
 
+    while (current) {
+      if (nodeVals.has(current.val)) {
+        let temp = current;
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+        current = current.next;
+        temp.next = null;
+        temp.prev = null;
+        this.length--;
+      } else {
+        nodeVals.add(current.val);
+        current = current.next;
+      }
+    }
+    return nodeVals;
   }
 }
+
+module.exports = {
+  LinkedList,
+  Node
+};
