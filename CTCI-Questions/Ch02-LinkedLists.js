@@ -59,8 +59,9 @@ class SinglyLinkedList {
       list.push(current.val);
       current = current.next;
     }
-    console.log(list);
+    return list.join(",");
   }
+
   /** Adds node to end of linked list */
   push(val) {
     const node = new NodeS(val);
@@ -131,7 +132,6 @@ class SinglyLinkedList {
         current = current.next;
       }
     }
-    console.log(nodeVals);
     return this;
   }
 
@@ -144,8 +144,9 @@ class SinglyLinkedList {
     Few Approaches here:
     1) with this.length, simply count down until we're at the correct node and return it
     2) Add nodes to array as we go, once we get to the end then return element len - k
-    3) Old fashioned, traverse to end to find len, then traverse again up to len - k
+    3) crappy, traverse to end to find len, then traverse again up to len - k
     4) Recursion, recurse to end, then back up until we're at k. Probs should do for practice.
+    5) I guess there's a multiple pointers approach to be used here as well.
     Will assume I can use a recorded length/height and reference that, effect is the same, but simpler to code
     */
     // start at head,
@@ -158,12 +159,32 @@ class SinglyLinkedList {
 
     while (counter > 0 && current) {
       current = current.next;
-      counter --;
+      counter--;
     }
     return current;
   }
+
+  /** 2.3 Delete Middle Node
+   * Deletes a given node from the middle of a linked list.
+   * @param {Node} - A node to be removed
+   */
+  deleteMiddleNode(node) {
+    /* I believe the only way to do this is to bring the value
+    of each node forward, then delete the tail */
+    let current = node;
+
+    while (current.next !== this.tail) {
+        current.val = current.next.val;
+        current = current.next;
+    }
+    current.val = current.next.val;
+    this.tail = current;
+    current.next = null;
+    this.length--;
+  }
 }
 
+/** Generates a singly linked list up to n nodes in height  */
 function generateLL(n, params = "none") {
   const list = new SinglyLinkedList();
   for (let i = 1; i <= n; i++) {
