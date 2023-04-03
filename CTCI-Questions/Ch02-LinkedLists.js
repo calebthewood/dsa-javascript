@@ -194,9 +194,9 @@ class SinglyLinkedList {
       *        grab first val >= x, store right head, do same, at end, point left to right head
     */
 
-    let rightHead = new Node();
+    let rightHead = new NodeS();
     let right = rightHead;
-    let leftHead = new Node();
+    let leftHead = new NodeS();
     let left = leftHead;
     let current = this.head;
 
@@ -210,24 +210,41 @@ class SinglyLinkedList {
       }
       current = current.next;
     }
+    right.next = null;
     left.next = rightHead.next;
     this.head = leftHead.next;
-    this.tail = right
-    return this.toString()
+    this.tail = right;
   }
 }
 
-/** Generates a singly linked list up to n nodes in height  */
+/** Generates an singly linked list up to n nodes in height
+ * @param {number} n height of the linked list
+ * @param {string} params dictates node values
+ *
+ *   "none" - ordered from 1 to n
+ *
+ *   "duplicate" - two of each num from 1 to n
+ *
+ *   "random" - random number from 0 to 99
+ */
 function generateLL(n, params = "none") {
   const list = new SinglyLinkedList();
   for (let i = 1; i <= n; i++) {
-    list.push(i);
+    if (params === "none") {
+      list.push(i);
+    }
     if (params === "duplicate") {
       list.push(i);
+      list.push(i);
+    }
+    if (params === "random") {
+      list.push(i % 2 === 0 ? i : i * 11);
     }
   }
   return list;
 }
+
+
 
 module.exports = {
   SinglyLinkedList,

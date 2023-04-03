@@ -1,4 +1,4 @@
-const { generateLL, LinkedList, Node } = require('./Ch02-LinkedLists');
+const { generateLL } = require('./Ch02-LinkedLists');
 
 describe("2.1 Remove Duplicates", () => {
   const listA = generateLL(20, "duplicate");
@@ -30,14 +30,26 @@ describe("2.3 Delete Middle Node", () => {
   test("Should delete node 2", () => {
     const node2 = listC.findFromEnd(3);
     listC.deleteMiddleNode(node2);
-    let result = listC.print();
+    let result = listC.toString();
     expect(result).toEqual('1,3,4,5');
   });
 
   test("Should delete node 4", () => {
     const node4 = listC.findFromEnd(2);
     listC.deleteMiddleNode(node4);
-    result = listC.print();
+    result = listC.toString();
     expect(result).toEqual('1,4,5');
+  });
+});
+
+describe("2.4 Should partition node on n", () => {
+  const listD = generateLL(10, "random");
+  // listC = 11,2,33,4,55,6,77,8,99,10
+  test("Should be out of order", () => {
+    expect(listD.toString()).toEqual("11,2,33,4,55,6,77,8,99,10");
+  });
+  test("Should be partitioned on 11", () => {
+    listD.partition(11)
+    expect(listD.toString()).toEqual("2,4,6,8,10,11,33,55,77,99");
   });
 });
