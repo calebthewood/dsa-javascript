@@ -17,7 +17,7 @@ class NodeD {
    * @constructor Creates a new node with the given value.
    * @param {*} val - The value to be stored in the node.
    */
-  constructor(val) {
+  constructor(val = 0) {
     this.val = val;
     this.next = null;
     this.prev = null;
@@ -51,7 +51,7 @@ class SinglyLinkedList {
     this.length = 0;
   }
   /** Prints node list values as an array */
-  print() {
+  toString() {
     const list = [];
     let current = this.head;
 
@@ -174,13 +174,46 @@ class SinglyLinkedList {
     let current = node;
 
     while (current.next !== this.tail) {
-        current.val = current.next.val;
-        current = current.next;
+      current.val = current.next.val;
+      current = current.next;
     }
     current.val = current.next.val;
     this.tail = current;
     current.next = null;
     this.length--;
+  }
+
+  /** 2.4 Partition
+   * Partition linked list nodes around a value, x such that all nodes < x
+   * come before all nodes >= x.
+   * @param {number} x A value to partition the list on
+   */
+  partition(x) {
+    /* Opt 1: traverse ll, pop & cache all nodes >= x, add them at the end
+      * Opt 2: grab first val < x, store left head, attach all lesser vals to it,
+      *        grab first val >= x, store right head, do same, at end, point left to right head
+    */
+
+    let rightHead = new Node();
+    let right = rightHead;
+    let leftHead = new Node();
+    let left = leftHead;
+    let current = this.head;
+
+    while (current) {
+      if (current.val >= x) {
+        right.next = current;
+        right = right.next;
+      } else {
+        left.next = current;
+        left = left.next;
+      }
+      current = current.next;
+    }
+    left.next = rightHead.next;
+    this.head = leftHead.next;
+    this.tail = right
+    return this.toString()
   }
 }
 
