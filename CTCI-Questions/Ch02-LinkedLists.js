@@ -269,6 +269,7 @@ class SinglyLinkedList {
       this.length++;
       nodeA = nodeA.next;
     }
+
     while (nodeB) {
       sum = nodeB.val + carry;
       digit = sum > 9 ? sum - 10 : sum;
@@ -280,18 +281,17 @@ class SinglyLinkedList {
       nodeB = nodeB.next;
     }
 
-    if (carry > 0) {
+    if (carry) {
       current.next = new NodeS(carry);
       current = current.next;
       this.tail = current;
       this.length++;
     }
     return this;
-
   }
 }
 
-/** Generates an singly linked list up to n nodes in height
+/** Generates an singly linked list based on given parameter
  * @param {number} n height of the linked list
  * @param {string} params dictates node values
  *
@@ -299,7 +299,7 @@ class SinglyLinkedList {
  *
  *   "duplicate" - two of each num from 1 to n
  *
- *   "random" - random number from 0 to 99
+ *   "random" - simulates random, by alternating btwn high and low values (needs rename)
  */
 function generateLL(n, params = "none") {
   const list = new SinglyLinkedList();
