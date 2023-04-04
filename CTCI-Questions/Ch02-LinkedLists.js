@@ -247,9 +247,9 @@ class SinglyLinkedList {
     nodeA = nodeA.next;
     nodeB = nodeB.next;
 
-    while (nodeA || nodeB) {
+    while (nodeA && nodeB) {
       sum = nodeA.val + nodeB.val + carry;
-      digit = sum > 9 ? 9 : sum;
+      digit = sum > 9 ? sum - 10 : sum;
       carry = sum > 9 ? 1 : 0;
       current.next = new NodeS(digit);
       current = current.next;
@@ -259,31 +259,35 @@ class SinglyLinkedList {
       this.length++;
     }
 
-    if (nodeA) {
-      while (nodeA) {
-        sum = nodeA.val + carry;
-        digit = sum > 9 ? sum % 10 : sum;
-        carry = sum > 9 ? 1 : 0;
-        current.next = new NodeS(nodeA.val);
-        current = current.next;
-        this.tail = current;
-        this.length++;
-        nodeA = nodeA.next;
-      }
+    while (nodeA) {
+      sum = nodeA.val + carry;
+      digit = sum > 9 ? sum - 10 : sum;
+      carry = sum > 9 ? 1 : 0;
+      current.next = new NodeS(nodeA.val);
+      current = current.next;
+      this.tail = current;
+      this.length++;
+      nodeA = nodeA.next;
     }
-    if (nodeB) {
-      while (nodeB) {
-        sum = nodeB.val + carry;
-        digit = sum > 9 ? sum % 10 : sum;
-        carry = sum > 9 ? 1 : 0;
-        current.next = new NodeS(nodeB.val);
-        current = current.next;
-        this.tail = current;
-        this.length++;
-        nodeB = nodeB.next;
-      }
-      return this;
+    while (nodeB) {
+      sum = nodeB.val + carry;
+      digit = sum > 9 ? sum - 10 : sum;
+      carry = sum > 9 ? 1 : 0;
+      current.next = new NodeS(nodeB.val);
+      current = current.next;
+      this.tail = current;
+      this.length++;
+      nodeB = nodeB.next;
     }
+
+    if (carry > 0) {
+      current.next = new NodeS(carry);
+      current = current.next;
+      this.tail = current;
+      this.length++;
+    }
+    return this;
+
   }
 }
 
