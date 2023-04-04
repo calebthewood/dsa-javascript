@@ -290,8 +290,8 @@ function zeroMatrix(matrix) {
     }
   }
   // change any element in a row or column with a 0 to 0
-  for (y = 0; y < rows; y++) {
-    for (x = 0; x < cols; x++) {
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
       if (xCoords.has(x) || yCoords.has(y)) {
         matrix[y][x] = 0;
       }

@@ -215,6 +215,76 @@ class SinglyLinkedList {
     this.head = leftHead.next;
     this.tail = right;
   }
+
+  /** 2.5 Sum Lists
+   * Accepts two linked lists where the values contained by each node represent a digit of a number.
+   *  @param {SinglyLinkedList} listA 3 -> 5 -> 1 == 153
+   *  @param {SinglyLinkedList} listB 2 -> 3 -> 9 == 932
+   *  @returns summed list. 5 -> 8 -> 0 -> 1
+   *  153 + 932 = 1085
+   */
+  sumList(listA, listB) {
+    /* Approach #1: pointers for A&B, sum vals and create node for c, return c at the end */
+    /* Approach #2: could get vals from each ll, combine, sum them, split, and create a new ll */
+    /*
+    init nodeA, nodeB, listC, carry[]
+    traverse lists
+      sum A&B, split sum, push to carry
+      nodeC = new node(carry.pop())
+      handle curr.next etc.
+    return listC
+    */
+
+    let nodeA = listA.head;
+    let nodeB = listB.head;
+    let sum = nodeA.val + nodeB.val;
+    let digit = sum > 9 ? 9 : sum;
+    let carry = sum > 9 ? 1 : 0;
+    this.head = new NodeS(digit);
+    this.tail = this.head;
+    this.length++;
+    let current = this.head;
+    nodeA = nodeA.next;
+    nodeB = nodeB.next;
+
+    while (nodeA || nodeB) {
+      sum = nodeA.val + nodeB.val + carry;
+      digit = sum > 9 ? 9 : sum;
+      carry = sum > 9 ? 1 : 0;
+      current.next = new NodeS(digit);
+      current = current.next;
+      nodeA = nodeA.next;
+      nodeB = nodeB.next;
+      this.tail = current;
+      this.length++;
+    }
+
+    if (nodeA) {
+      while (nodeA) {
+        sum = nodeA.val + carry;
+        digit = sum > 9 ? sum % 10 : sum;
+        carry = sum > 9 ? 1 : 0;
+        current.next = new NodeS(nodeA.val);
+        current = current.next;
+        this.tail = current;
+        this.length++;
+        nodeA = nodeA.next;
+      }
+    }
+    if (nodeB) {
+      while (nodeB) {
+        sum = nodeB.val + carry;
+        digit = sum > 9 ? sum % 10 : sum;
+        carry = sum > 9 ? 1 : 0;
+        current.next = new NodeS(nodeB.val);
+        current = current.next;
+        this.tail = current;
+        this.length++;
+        nodeB = nodeB.next;
+      }
+      return this;
+    }
+  }
 }
 
 /** Generates an singly linked list up to n nodes in height

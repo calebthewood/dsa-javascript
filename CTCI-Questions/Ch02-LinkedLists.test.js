@@ -1,4 +1,4 @@
-const { generateLL } = require('./Ch02-LinkedLists');
+const { generateLL, SinglyLinkedList } = require('./Ch02-LinkedLists');
 
 describe("2.1 Remove Duplicates", () => {
   const listA = generateLL(20, "duplicate");
@@ -37,7 +37,7 @@ describe("2.3 Delete Middle Node", () => {
   test("Should delete node 4", () => {
     const node4 = listC.findFromEnd(2);
     listC.deleteMiddleNode(node4);
-    result = listC.toString();
+    let result = listC.toString();
     expect(result).toEqual('1,4,5');
   });
 });
@@ -52,4 +52,24 @@ describe("2.4 Should partition node on n", () => {
     listD.partition(11)
     expect(listD.toString()).toEqual("2,4,6,8,10,11,33,55,77,99");
   });
+});
+
+describe("2.5 Should return linked list with sums", () => {
+  const listE = generateLL(3, "none");
+  const listF = generateLL(3, "none");
+  // 1,2,3  -> 321 + 321 = 642 or 2,4,6
+  const summedLLA = new SinglyLinkedList()
+  summedLLA.sumList(listE, listF)
+  test("Should return summed linked list", () => {
+    expect(summedLLA.toString()).toEqual("2,4,6");
+  });
+  const listG = generateLL(7, "none");
+  const listH = generateLL(7, "none");
+  // 1,2,3,4,5,6,7  ->  2,4,6,8,0,3,5,1
+  const summedLLB = new SinglyLinkedList()
+  summedLLB.sumList(listG, listH)
+  test("Should handle carrying digits", () => {
+    expect(summedLLB.toString()).toEqual("2,4,6,8,0,3,5,1");
+  });
+
 });
