@@ -69,7 +69,7 @@ class SinglyLinkedList {
       this.head = node;
       this.tail = node;
     } else {
-      let temp = this.tail
+      let temp = this.tail;
       this.tail.next = node;
       this.tail = node;
     }
@@ -307,16 +307,35 @@ class SinglyLinkedList {
     this.push(sum.shift());
 
     while (sum.length) {
-      this.push(sum.shift())
+      this.push(sum.shift());
     }
     return this;
   }
 
   /** 2.6 Palindrome */
+  isPalindrome() {
+    const stack = [];
+    let current = this.head;
+    const len = this.length / 2;
+    while (stack.length < this.length / 2) {
+      stack.push(current.val);
+      current = current.next;
+    }
+
+    if (this.length % 2 !== 0) stack.pop();
+
+    while (stack.length) {
+      if (current.val !== stack.pop()) {
+        return false;
+      }
+      current = current.next;
+    }
+    return true;
+  }
 }
 
 /** Generates an singly linked list based on given parameter
- * @param {number} n height of the linked list
+ * @param {number|string} n height of the linked list
  * @param {string} params dictates node values
  *
  *   "none" - ordered from 1 to n
@@ -327,16 +346,23 @@ class SinglyLinkedList {
  */
 function generateLL(n, params = "none") {
   const list = new SinglyLinkedList();
-  for (let i = 1; i <= n; i++) {
-    if (params === "none") {
-      list.push(i);
+
+  if (typeof n === 'number') {
+    for (let i = 1; i <= n; i++) {
+      if (params === "none") {
+        list.push(i);
+      }
+      if (params === "duplicate") {
+        list.push(i);
+        list.push(i);
+      }
+      if (params === "random") {
+        list.push(i % 2 === 0 ? i : i * 11);
+      }
     }
-    if (params === "duplicate") {
-      list.push(i);
-      list.push(i);
-    }
-    if (params === "random") {
-      list.push(i % 2 === 0 ? i : i * 11);
+  } else if (n === 'palindrome') {
+    for (let char of params) {
+      list.push(char)
     }
   }
   return list;
