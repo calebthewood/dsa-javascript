@@ -83,5 +83,36 @@ describe("2.5 Should return linked list with sums", () => {
   test("Should handle lists of uneven length", () => {
     expect(summedLLC.toString()).toEqual("2,4,6,4");
   });
+});
 
+describe("2.5 (reversed) Should return linked list with sums", () => {
+  const listE = generateLL(3, "none");
+  const listF = generateLL(3, "none");
+  // 1,2,3  -> 123 + 123 = 246 or 2,4,6
+  const summedLLA = new SinglyLinkedList()
+  summedLLA.reverseSumLists(listE, listF)
+
+  test("Should return summed linked list", () => {
+    expect(summedLLA.toString()).toEqual("2,4,6");
+  });
+
+  const listG = generateLL(7, "none");
+  const listH = generateLL(7, "none");
+  // 1,2,3,4,5,6,7  ->  2,4,6,9,1,3,4
+  const summedLLB = new SinglyLinkedList()
+  summedLLB.reverseSumLists(listG, listH)
+
+  test("Should handle carrying digits", () => {
+    expect(summedLLB.toString()).toEqual("2,4,6,9,1,3,4");
+  });
+
+  const listI = generateLL(3, "none");
+  const listJ = generateLL(4, "none");
+  // 1,2,3 + 1,2,3,4  ->  1,3,5,7
+  const summedLLC = new SinglyLinkedList()
+  summedLLC.reverseSumLists(listI, listJ)
+
+  test("Should handle lists of uneven length", () => {
+    expect(summedLLC.toString()).toEqual("1,3,5,7");
+  });
 });

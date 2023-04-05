@@ -34,12 +34,12 @@ class SinglyLinkedList {
    */
   constructor() {
     /**
-    * @type {Node}
+    * @type {NodeS}
     * @default null
     */
     this.head = null;
     /**
-    * @type {Node}
+    * @type {NodeS}
     * @default null
     */
     this.tail = null;
@@ -69,10 +69,11 @@ class SinglyLinkedList {
       this.head = node;
       this.tail = node;
     } else {
+      let temp = this.tail
       this.tail.next = node;
       this.tail = node;
     }
-    this.length += 1;
+    this.length++;
     return this;
   }
 
@@ -240,9 +241,7 @@ class SinglyLinkedList {
     let sum = nodeA.val + nodeB.val;
     let digit = sum > 9 ? 9 : sum;
     let carry = sum > 9 ? 1 : 0;
-    this.head = new NodeS(digit);
-    this.tail = this.head;
-    this.length++;
+    this.push(digit);
     let current = this.head;
     nodeA = nodeA.next;
     nodeB = nodeB.next;
@@ -251,22 +250,18 @@ class SinglyLinkedList {
       sum = nodeA.val + nodeB.val + carry;
       digit = sum > 9 ? sum - 10 : sum;
       carry = sum > 9 ? 1 : 0;
-      current.next = new NodeS(digit);
+      this.push(digit);
       current = current.next;
       nodeA = nodeA.next;
       nodeB = nodeB.next;
-      this.tail = current;
-      this.length++;
     }
 
     while (nodeA) {
       sum = nodeA.val + carry;
       digit = sum > 9 ? sum - 10 : sum;
       carry = sum > 9 ? 1 : 0;
-      current.next = new NodeS(nodeA.val);
+      this.push(nodeA.val);
       current = current.next;
-      this.tail = current;
-      this.length++;
       nodeA = nodeA.next;
     }
 
@@ -274,21 +269,50 @@ class SinglyLinkedList {
       sum = nodeB.val + carry;
       digit = sum > 9 ? sum - 10 : sum;
       carry = sum > 9 ? 1 : 0;
-      current.next = new NodeS(nodeB.val);
+      this.push(nodeB.val);
       current = current.next;
-      this.tail = current;
-      this.length++;
       nodeB = nodeB.next;
     }
 
     if (carry) {
-      current.next = new NodeS(carry);
+      this.push(carry);
       current = current.next;
-      this.tail = current;
-      this.length++;
     }
     return this;
   }
+
+  /** 2.5 Pt 2. Sum Lists Reversed
+   *  @param {SinglyLinkedList} listA 1 -> 5 -> 3 == 153
+   *  @param {SinglyLinkedList} listB 9 -> 3 -> 2 == 932
+   *  @returns summed list. 1 -> 0 -> 8 -> 5
+   *  153 + 932 = 1085
+   */
+  reverseSumLists(listA, listB) {
+    let nodeA = listA.head;
+    let nodeB = listB.head;
+    let numA = "";
+    let numB = "";
+
+    while (nodeA) {
+      numA += String(nodeA.val);
+      nodeA = nodeA.next;
+    }
+
+    while (nodeB) {
+      numB += String(nodeB.val);
+      nodeB = nodeB.next;
+    }
+
+    let sum = String(Number(numA) + Number(numB)).split("");
+    this.push(sum.shift());
+
+    while (sum.length) {
+      this.push(sum.shift())
+    }
+    return this;
+  }
+
+  /** 2.6 Palindrome */
 }
 
 /** Generates an singly linked list based on given parameter
