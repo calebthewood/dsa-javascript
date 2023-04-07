@@ -232,16 +232,8 @@ class SinglyLinkedList {
    *  153 + 932 = 1085
    */
   sumList(listA, listB) {
-    /* Approach #1: pointers for A&B, sum vals and create node for c, return c at the end */
-    /* Approach #2: could get vals from each ll, combine, sum them, split, and create a new ll */
-    /*
-    init nodeA, nodeB, listC, carry[]
-    traverse lists
-      sum A&B, split sum, push to carry
-      nodeC = new node(carry.pop())
-      handle curr.next etc.
-    return listC
-    */
+    // Approach #1: pointers for A&B, sum vals and create node for c, return c at the end
+    // Approach #2: could get vals from each ll, combine, sum them, split, and create a new ll
 
     let nodeA = listA.head;
     let nodeB = listB.head;
@@ -318,7 +310,9 @@ class SinglyLinkedList {
     return this;
   }
 
-  /** 2.6 Palindrome */
+  /** 2.6 Palindrome
+   * @returns {boolean} true if list is a palindrome, else false
+   */
   isPalindrome() {
     const stack = [];
     let current = this.head;
@@ -349,12 +343,8 @@ class SinglyLinkedList {
     /* Approaches
     1) brute - compare each node of listA, with check node of ListB
     2) misses the point? - Add nodes to set, should go up by 2, if goes up by 1, we found intersection
-    3) check tails, if same node, then check lens, if even go len/2, if not go to longlen - short len*/
+    3) check tails, if same node, then check lens, if even go len/2, if not go to longlen - short len */
     if (listA.tail !== listB.tail) return null;
-
-    console.log(listB.length)
-    console.log(listA.length)
-
     let nodeA = listA.head;
     let nodeB = listB.head;
 
@@ -380,7 +370,7 @@ class SinglyLinkedList {
 /** Generates an singly linked list based on given parameter
  * @param {number|string} n height of the linked list
  * @param {string} params dictates node values
- *
+ * @returns {SinglyLinkedList}
  *   "none" - ordered from 1 to n
  *
  *   "duplicate" - two of each num from 1 to n
@@ -389,7 +379,6 @@ class SinglyLinkedList {
  */
 function generateLL(n = 10, params = "none", k = 0) {
   const list = new SinglyLinkedList();
-  const listB = new SinglyLinkedList();
 
   if (typeof n === 'number') {
     for (let i = 1; i <= n; i++) {
@@ -412,6 +401,13 @@ function generateLL(n = 10, params = "none", k = 0) {
   return list;
 }
 
+/**
+ *
+ * @param {number} lenA
+ * @param {number} lenB
+ * @param {number} meetAt
+ * @returns two intersecting lists
+ */
 function generateIntersectionLists(lenA, lenB, meetAt) {
   const listA = new SinglyLinkedList();
   const listB = new SinglyLinkedList();
