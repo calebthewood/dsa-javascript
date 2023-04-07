@@ -62,7 +62,12 @@ class SinglyLinkedList {
     return list.join(",");
   }
 
-  /** Adds node to end of linked list */
+  /** Adds node to end of linked list
+   * Time Complexity: O(1) Space Complexity: O(1)
+   *
+   * @param {number|string} val - a value to be held by new node
+   * @returns {this} the linked list
+   */
   push(val) {
     const node = new NodeS(val);
     if (!this.head) {
@@ -78,10 +83,11 @@ class SinglyLinkedList {
   }
 
   /**
-   * Deletes a node from the linked list.
+   * Deletes a node from the linked list
+   * Time Complexity: O(n) Space Complexity: O(1)
    *
-   * @param {Node} node - The node to be deleted.
-   * @returns {Node} - The deleted node, or null if the linked list is empty.
+   * @param {Node} node - The node to be deleted
+   * @returns {Node} - The deleted node, or null if the linked list is empty
    */
   deleteNode(node) {
     if (this.head === null) return null;
@@ -109,15 +115,15 @@ class SinglyLinkedList {
   }
 
   /** 2.1 Remove Dups
-   *  Removes duplicates from an unsorted linked list.
+   *  Removes duplicates from an unsorted linked list
+   *  Time Complexity: O(n) Space Complexity: O(n)
+   *  @returns {this} returns linked list
    */
   removeDups() {
-    /*
-    keep a set as reference,
+    /* keep a set as reference,
     if set has node val, delete it
     else add it to set and keep moving
-    alts to set?? I think the only alternative would involve vastly higher time complexity
-    */
+    alts to set?? I think the only alternative would involve vastly higher time complexity */
     let prev = this.head;
     let current = this.head.next;
     const nodeVals = new Set([prev.val]);
@@ -332,6 +338,40 @@ class SinglyLinkedList {
     }
     return true;
   }
+
+  /** 2.7 Intersection
+   * Determines whether two singly linked lists intersect and if so, returns the intersection as a list.
+  */
+  intersection(listA, listB) {
+    /* Approaches
+    1) brute - compare each node of listA, with check node of ListB
+    2) misses the point? - Add nodes to set, should go up by 2, if goes up by 1, we found intersection
+    3) check tails, if same node, then check lens, if even go len/2, if not go to longlen - short len*/
+    if (listA.tail !== listB.tail) return this;
+
+    console.log(listB.length)
+    console.log(listA.length)
+
+    let nodeA = listA.head;
+    let nodeB = listB.head;
+
+    if (listA.length < listB.length) {
+      for (let i = 0; i < listB.length - listA.length; i++) {
+        nodeB = nodeB.next;
+      }
+    }
+    if (listB.length < listA.length) {
+      for (let i = 0; i < listA.length - listB.length; i++) {
+        nodeA = nodeA.next;
+      }
+    }
+
+    while (nodeA !== nodeB) {
+      nodeA = nodeA.next;
+      nodeB = nodeB.next;
+    }
+    return nodeA;
+  }
 }
 
 /** Generates an singly linked list based on given parameter
@@ -344,8 +384,9 @@ class SinglyLinkedList {
  *
  *   "random" - simulates random, by alternating btwn high and low values (needs rename)
  */
-function generateLL(n, params = "none") {
+function generateLL(n = 10, params = "none", k = 0) {
   const list = new SinglyLinkedList();
+  const listB = new SinglyLinkedList();
 
   if (typeof n === 'number') {
     for (let i = 1; i <= n; i++) {
@@ -362,15 +403,35 @@ function generateLL(n, params = "none") {
     }
   } else if (n === 'palindrome') {
     for (let char of params) {
-      list.push(char)
+      list.push(char);
     }
   }
   return list;
 }
 
+function generateIntersectionLists(lenA, lenB, meetAt) {
+  const listA = new SinglyLinkedList();
+  const listB = new SinglyLinkedList();
+  listB.push(0);
+  for (let i = 1; i < meetAt; i++) {
+    listA.push(i);
+    listB.push(i * 11);
+  }
 
+  listA.tail.next = listB.tail;
+  listA.length++;
+
+  while (meetAt < lenB) {
+    listB.push(meetAt);
+    listA.length++;
+    meetAt++;
+  }
+  listA.tail = listB.tail;
+  return [listA, listB];
+}
 
 module.exports = {
   SinglyLinkedList,
   generateLL,
+  generateIntersectionLists
 };

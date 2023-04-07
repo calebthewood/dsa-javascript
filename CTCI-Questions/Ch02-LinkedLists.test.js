@@ -1,4 +1,4 @@
-const { generateLL, SinglyLinkedList } = require('./Ch02-LinkedLists');
+const { generateLL, SinglyLinkedList, generateIntersectionLists } = require('./Ch02-LinkedLists');
 
 describe("2.1 Remove Duplicates", () => {
   const listA = generateLL(20, "duplicate");
@@ -129,8 +129,29 @@ describe("2.6 Is palindrome", () => {
     expect(listB.isPalindrome()).toBe(false);
   });
 
-  const listC = generateLL("palindrome", "abcddcba");
-  test("Should return return false for 'abcddcba'", () => {
+  const listC = generateLL("palindrome", "noon");
+  test("Should return return false for 'noon'", () => {
     expect(listC.isPalindrome()).toBe(true);
   });
+});
+
+describe("2.7 Intersection", () => {
+
+  const [listA, listB] = generateIntersectionLists(0,6,3)
+  //listA = 1,2,22,3,4,5
+  //listB = 0,11,22,3,4,5
+  //inter = 22,3,4,5
+  const interLL = new SinglyLinkedList();
+  console.log(listB.length)
+  test("Testing Intersection", () => {
+    expect(listA.toString()).toEqual('1,2,22,3,4,5')
+  });
+  test("Testing Intersection", () => {
+    expect(listB.toString()).toEqual('0,11,22,3,4,5')
+  });
+  test("Testing Intersection", () => {
+    let result = interLL.intersection(listA,listB)
+    expect(result.val).toEqual(22);
+  });
+
 });
