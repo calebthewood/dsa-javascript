@@ -144,7 +144,8 @@ class SinglyLinkedList {
 
   /** 2.2  Return Kth to Last
    * Returns the kth node from the end of the list.
-   * QUESTION: is the last item 1st from end or 0 from end??
+   * @param {number} distance from end of list
+   * @return {NodeS} NodeS - returns NodeS
    */
   findFromEnd(k) {
     /*
