@@ -117,7 +117,7 @@ class SinglyLinkedList {
   /** 2.1 Remove Dups
    *  Removes duplicates from an unsorted linked list
    *  Time Complexity: O(n) Space Complexity: O(n)
-   *  @returns {this} returns linked list
+   *  @returns {SinglyLinkedList} returns list
    */
   removeDups() {
     /* keep a set as reference,
@@ -174,7 +174,7 @@ class SinglyLinkedList {
 
   /** 2.3 Delete Middle Node
    * Deletes a given node from the middle of a linked list.
-   * @param {Node} - A node to be removed
+   * @param {Node} node A node to be removed
    */
   deleteMiddleNode(node) {
     /* I believe the only way to do this is to bring the value
@@ -228,7 +228,7 @@ class SinglyLinkedList {
    * Accepts two linked lists where the values contained by each node represent a digit of a number.
    *  @param {SinglyLinkedList} listA 3 -> 5 -> 1 == 153
    *  @param {SinglyLinkedList} listB 2 -> 3 -> 9 == 932
-   *  @returns summed list. 5 -> 8 -> 0 -> 1
+   *  @returns {SinglyLinkedList} - summed list. 5 -> 8 -> 0 -> 1
    *  153 + 932 = 1085
    */
   sumList(listA, listB) {
@@ -291,8 +291,7 @@ class SinglyLinkedList {
   /** 2.5 Pt 2. Sum Lists Reversed
    *  @param {SinglyLinkedList} listA 1 -> 5 -> 3 == 153
    *  @param {SinglyLinkedList} listB 9 -> 3 -> 2 == 932
-   *  @returns summed list. 1 -> 0 -> 8 -> 5
-   *  153 + 932 = 1085
+   *  @returns {SinglyLinkedList} summed list. 1 -> 0 -> 8 -> 5
    */
   reverseSumLists(listA, listB) {
     let nodeA = listA.head;
@@ -342,13 +341,16 @@ class SinglyLinkedList {
 
   /** 2.7 Intersection
    * Determines whether two singly linked lists intersect and if so, returns the intersection as a list.
+   * @param {listA} - first list
+   * @param {listB} - second list
+   * @returns {NodeS|null} returns intersecting node or null
   */
   intersection(listA, listB) {
     /* Approaches
     1) brute - compare each node of listA, with check node of ListB
     2) misses the point? - Add nodes to set, should go up by 2, if goes up by 1, we found intersection
     3) check tails, if same node, then check lens, if even go len/2, if not go to longlen - short len*/
-    if (listA.tail !== listB.tail) return this;
+    if (listA.tail !== listB.tail) return null;
 
     console.log(listB.length)
     console.log(listA.length)
