@@ -162,6 +162,7 @@ class SinglyLinkedList {
     // traverse while counter > 0;
     // return current
     if (!this.head) return null;
+    if (k < 0 || k > this.length) return null;
     let current = this.head;
     let counter = this.length - k - 1;
 
@@ -189,6 +190,7 @@ class SinglyLinkedList {
     this.tail = current;
     current.next = null;
     this.length--;
+    return current;
   }
 
   /** 2.4 Partition
@@ -314,6 +316,9 @@ class SinglyLinkedList {
    * @returns {boolean} true if list is a palindrome, else false
    */
   isPalindrome() {
+    if (this.length < 2) return false;
+    if (!this.head) return false;
+
     const stack = [];
     let current = this.head;
     const len = this.length / 2;
@@ -376,6 +381,7 @@ class SinglyLinkedList {
       2) traverse list with fast and slow pointers... */
     const nodes = new Set([]);
     let current = this.head;
+    if (!this.head) return null
 
     while (current) {
       if (nodes.has(current)) return current;
