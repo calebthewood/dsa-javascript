@@ -119,20 +119,18 @@ describe("2.5 (reversed) Should return linked list with sums", () => {
 });
 
 describe("2.6 Is palindrome", () => {
+  const tacocat = generateLL("palindrome", "tacocat");
+  const palindrome = generateLL("palindrome", "palindrome");
+  const noon = generateLL("palindrome", "noon");
 
-  const listA = generateLL("palindrome", "tacocat");
   test("Should return return true for 'tacocat'", () => {
-    expect(listA.isPalindrome()).toBe(true);
+    expect(tacocat.isPalindrome()).toBe(true);
   });
-
-  const listB = generateLL("palindrome", "palindrome");
   test("Should return return false for 'palindrome'", () => {
-    expect(listB.isPalindrome()).toBe(false);
+    expect(palindrome.isPalindrome()).toBe(false);
   });
-
-  const listC = generateLL("palindrome", "noon");
-  test("Should return return false for 'noon'", () => {
-    expect(listC.isPalindrome()).toBe(true);
+  test("Should return return true for 'noon'", () => {
+    expect(noon.isPalindrome()).toBe(true);
   });
 });
 
