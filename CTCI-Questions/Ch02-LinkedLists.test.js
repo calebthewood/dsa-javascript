@@ -138,11 +138,9 @@ describe("2.6 Is palindrome", () => {
 
 describe("2.7 Intersection", () => {
   const [listA, listB] = generateIntersectionLists(0, 6, 3);
-  //listA = 1,2,22,3,4,5
-  //listB = 0,11,22,3,4,5
+  //listA = 1,2,22,3,4,5 listB = 0,11,22,3,4,5
+  let result = new SinglyLinkedList().intersection(listA, listB);
   //inter = 22,3,4,5
-  const interLL = new SinglyLinkedList();
-  console.log(listB.length);
   test("Testing Intersection", () => {
     expect(listA.toString()).toEqual('1,2,22,3,4,5');
   });
@@ -150,19 +148,26 @@ describe("2.7 Intersection", () => {
     expect(listB.toString()).toEqual('0,11,22,3,4,5');
   });
   test("Testing Intersection", () => {
-    let result = interLL.intersection(listA, listB);
     expect(result.val).toEqual(22);
   });
 });
 
 describe("2.8 Detect Loop", () => {
-  const list = generateLoopedLL(5, 2);
-  const listA = generateLoopedLL(5, 6);
-  // list: 5,4,3,2,1->2
+  const loop = generateLoopedLL(5, 2); // loop
+  const largeLoop = generateLoopedLL(500, 250); // large loop
+  const noLoop = generateLoopedLL(5, 6); // no loop
+  const emptyList = new SinglyLinkedList(); // empty list
+
   test("List should loop at node 2", () => {
-    expect(list.loopDetection().val).toEqual(2);
+    expect(loop.loopDetection().val).toEqual(2);
   });
-  test("Should return false when no loop detected", () => {
-    expect(listA.loopDetection()).toEqual(null);
+  test("List should loop at node 250", () => {
+    expect(largeLoop.loopDetection().val).toEqual(250);
+  });
+  test("Should return null when no loop detected", () => {
+    expect(noLoop.loopDetection()).toEqual(null);
+  });
+  test("Should return null with empty list", () => {
+    expect(emptyList.loopDetection()).toEqual(null);
   });
 });
