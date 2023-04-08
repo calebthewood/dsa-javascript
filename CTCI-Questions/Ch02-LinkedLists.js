@@ -365,6 +365,25 @@ class SinglyLinkedList {
     }
     return nodeA;
   }
+
+  /** 2.8 Loop Detection
+   *  Determines whether a loop exists in a linked list and returns the originating node.
+   *  @returns {NodeS|null} returns the loop originating node or null
+   */
+  loopDetection() {
+    /* Approaches
+      1) traverse list, add nodes to set, if set has node, return node
+      2) traverse list with fast and slow pointers... */
+    const nodes = new Set([]);
+    let current = this.head;
+
+    while (current) {
+      if (nodes.has(current)) return current;
+      nodes.add(current);
+      current = current.next;
+    }
+    return null;
+  }
 }
 
 /** Generates an singly linked list based on given parameter
@@ -429,8 +448,31 @@ function generateIntersectionLists(lenA, lenB, meetAt) {
   return [listA, listB];
 }
 
+/**
+ * Generates a Linked Lsit with a loop in it. Inputting a k > len will result in
+ * a LL with no loop.
+ * @param {number} len - length/height of the list
+ * @param {number} k - index (from tail) where the list loops
+ * @returns {SinglyLinkedList} List with a loop
+ */
+function generateLoopedLL(len, k) {
+  let list = new SinglyLinkedList()
+  let intersect;
+  while (len > 0) {
+    list.push(len)
+    if (len === k) {
+      intersect = list.tail;
+    }
+    len--;
+  }
+  list.tail.next = intersect;
+  list.tail = intersect
+  return list
+}
+
 module.exports = {
   SinglyLinkedList,
   generateLL,
-  generateIntersectionLists
+  generateIntersectionLists,
+  generateLoopedLL
 };

@@ -1,4 +1,5 @@
-const { generateLL, SinglyLinkedList, generateIntersectionLists } = require('./Ch02-LinkedLists');
+const { describe } = require('node:test');
+const { generateLoopedLL, generateLL, SinglyLinkedList, generateIntersectionLists } = require('./Ch02-LinkedLists');
 
 describe("2.1 Remove Duplicates", () => {
   const listA = generateLL(20, "duplicate");
@@ -136,22 +137,32 @@ describe("2.6 Is palindrome", () => {
 });
 
 describe("2.7 Intersection", () => {
-
-  const [listA, listB] = generateIntersectionLists(0,6,3)
+  const [listA, listB] = generateIntersectionLists(0, 6, 3);
   //listA = 1,2,22,3,4,5
   //listB = 0,11,22,3,4,5
   //inter = 22,3,4,5
   const interLL = new SinglyLinkedList();
-  console.log(listB.length)
+  console.log(listB.length);
   test("Testing Intersection", () => {
-    expect(listA.toString()).toEqual('1,2,22,3,4,5')
+    expect(listA.toString()).toEqual('1,2,22,3,4,5');
   });
   test("Testing Intersection", () => {
-    expect(listB.toString()).toEqual('0,11,22,3,4,5')
+    expect(listB.toString()).toEqual('0,11,22,3,4,5');
   });
   test("Testing Intersection", () => {
-    let result = interLL.intersection(listA,listB)
+    let result = interLL.intersection(listA, listB);
     expect(result.val).toEqual(22);
   });
+});
 
+describe("2.8 Detect Loop", () => {
+  const list = generateLoopedLL(5, 2);
+  const listA = generateLoopedLL(5, 6);
+  // list: 5,4,3,2,1->2
+  test("List should loop at node 2", () => {
+    expect(list.loopDetection().val).toEqual(2);
+  });
+  test("Should return false when no loop detected", () => {
+    expect(listA.loopDetection()).toEqual(null);
+  });
 });
