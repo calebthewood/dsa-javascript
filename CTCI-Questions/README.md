@@ -1,14 +1,8 @@
-# Quick Guide to Setting up a Local TS-Jest Environment
+# Cracking the Coding Interview
+## Ch 1 - Arrays and Strings
+Wrote a series of functions to operate on basic iterables.
+## Ch 2 - Linked Lists
+Built a node and singly linked list class to handle traversing and modifying linked lists.
 
-Install Babel
-```
-$ npm install --save-dev babel-jest @babel/core @babel/preset-env
-```
-
-Config Babel
-```
-module.exports = {
-  presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
-};
-```
+## Ch 3 - Stacks and Queues
 

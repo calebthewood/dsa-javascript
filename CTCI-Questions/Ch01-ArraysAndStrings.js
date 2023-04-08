@@ -1,3 +1,4 @@
+"use strict";
 /** 1.1 Is Unique.
  * Determines if a string contains all unique characters.
  * @param {string} string - a plain string

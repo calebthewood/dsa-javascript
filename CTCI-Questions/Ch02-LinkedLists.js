@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @class Represents a node in a doubly linked list.
  */

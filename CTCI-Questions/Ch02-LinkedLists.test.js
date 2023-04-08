@@ -1,3 +1,4 @@
+"use strict";
 const { describe } = require('node:test');
 const { generateLoopedLL, generateLL, SinglyLinkedList, generateIntersectionLists } = require('./Ch02-LinkedLists');
 
