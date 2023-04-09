@@ -14,24 +14,26 @@ class Node {
 
 /** Represents a stack data structure. */
 class Stack {
-   /** @constructor Creates an empty stack */
+  /** @constructor Creates an empty stack */
   constructor() {
     /** @type {Node|null} - The node atop the stack */
-    this.first = null;
+    this.top = null;
     /** @type {Node|null} - The bottom node of the stack */
-    this.last = null;
+    this.bottom = null;
     /** @type {number} - Height of the stack */
     this.size = 0;
   }
   /** Console.logs teh stack as a string of comma seperated values */
   print() {
     const output = [];
-    let current = this.first;
+    let current = this.top;
     while (current) {
       output.push(current.val);
       current = current.next;
     }
-    console.log(output.join(", "));
+    let data = output.join(",");
+    console.log(data);
+    return data;
   }
   /**
    * Pushes a new node with given value onto the stack
@@ -40,13 +42,13 @@ class Stack {
    */
   push(val) {
     let node = new Node(val);
-    if (!this.first) {
-      this.first = node;
-      this.last = node;
+    if (!this.bottom) {
+      this.top = node;
+      this.bottom = node;
     } else {
-      let first = this.first;
-      this.first = node;
-      node.next = first;
+      let top = this.top;
+      this.top = node;
+      node.next = top;
     }
     this.size += 1;
     return this.size;
@@ -56,17 +58,25 @@ class Stack {
    * @returns {*} value of removed node
    */
   pop() {
-    let popped = this.first;
-    if (!this.first) return null;
+    if (!this.bottom) return null;
+    let popped = this.top;
     if (this.size === 1) {
-      this.first = null;
-      this.last = null;
+      this.top = null;
+      this.bottom = null;
     } else {
-      this.first = popped.next;
+      this.top = popped.next;
     }
     popped.next = null;
-    this.size -= 1;
+    this.size--;
     return popped.val;
+  }
+  /** @returns {*} Returns the top of the stack without modifying it */
+  peak() {
+    return this.top.val;
+  }
+  /** @returns {boolean} Returns true if stack is empty, else false */
+  isEmpty() {
+    return this.size === 0;
   }
 }
 
@@ -82,7 +92,9 @@ class Queue {
     /** @type {number} - Size of the queue */
     this.size = 0;
   }
-  /** Console.logs teh stack as a string of comma seperated values */
+  /** Console.logs and returns the stack as a string of comma seperated values
+   * @returns {string} returns node values as a string for evaluation
+   */
   print() {
     const output = [];
     let current = this.first;
@@ -90,7 +102,9 @@ class Queue {
       output.push(current.val);
       current = current.next;
     }
-    console.log(output.join(", "));
+    let data = output.join(",");
+    console.log(data);
+    return data;
   }
   /** Add an item to the end of the queue
    * @param {*} item - item to to be added to the queue in a Node
@@ -139,3 +153,6 @@ class Queue {
 /* ************************************************* Algo Solutions ********* */
 
 
+module.exports = {
+  Stack, Queue
+};
