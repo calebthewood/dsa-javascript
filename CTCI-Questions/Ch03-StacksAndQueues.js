@@ -198,6 +198,36 @@ function stackMin(val) {
  *  else if stackA, pop from a
  */
 
+/** 3.4 Queue via Stack
+ * Implement a MyQueue class which implements a queue using two stacks
+ *
+ * 1. stackA holds all values
+ *    - push adds a value on top of A
+ *    - pop moves all values to B, then removes & returns last value
+ * 2. Could optimize either push or pop based on use case, better to have fast read or fast write
+ *
+ */
+
+/** 3.5 Sort Stack
+ * A stack where the smallest value is always on top
+ *  -push
+ *  -pop
+ *  -peek
+ *  -isEmpty
+ *
+ * 1. Don't sort the whole stack, just scan it to get the smallest value whenever operating
+ * 2. Each time we push, move elements btwn stacks such that smallest val always ends up last
+
+  if stackA.peak() > val, push val
+  else stackB.push(stackA.pop())
+  rpt
+  once  val pushed, pop & push nodes from B back to A.
+
+*/
+
+/** 3.6 Animal Shelter
+ *
+ */
 
 
 module.exports = {
