@@ -152,6 +152,53 @@ class Queue {
 
 /* ************************************************* Algo Solutions ********* */
 
+/* 3.1 Three in One
+  Use a single array to implement 3 stacks
+  1. Split Array into 3, keep track of where each starts and ends
+  2. Make adjustable, expand arrays to use more space as they grow
+  3. Hints say think about it as if it's wrapping around...?
+ */
+
+/** 3.2 Stack Min
+ * Design a stack that tracks the minimum element.
+ * 1. Add a property on the class to track the current min
+ *  - when pushing/popping we check & update this.min,
+ * 2. add a property on the node that tracks current min
+ *  - give each node an additional value that represents the minimum value below that point
+ *
+ * fn is pseudo code, expresses core of answer, but wouldn't run on its own.
+ */
+function stackMin(val) {
+  const stack = new Stack();
+  let new_min, current_min;
+
+  if (stack.isEmpty()) {
+    new_min = val;
+  } else {
+    current_min = stack.peak()[1]
+    new_min = Math.min(val, current_min)
+  }
+  stack.push([val, new_min])
+}
+
+/** 3.3 Set of Plates
+ * implement a set of 3 stacks that function as a single stack,
+ * shifting values as needed.
+ * 1. would be simple to do with 3 arrays, and a few if statements.
+ *    Store them in an array to solve followup q.
+ *
+ * push()
+ *  if stackA.len < x && StackB.len == 0, push to a
+ *  else if stackB.len && StackC.len == 0 < x, push to b
+ *  else if stackC.len < x, push to c
+ *
+ * pop()
+ *  if stackC, pop from c
+ *  else if stackB, pop from b
+ *  else if stackA, pop from a
+ */
+
+
 
 module.exports = {
   Stack, Queue
