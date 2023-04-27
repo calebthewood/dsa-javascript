@@ -226,7 +226,14 @@ function stackMin(val) {
 */
 
 /** 3.6 Animal Shelter
+ *  A stack data structure where nodes have 2 types.
+ *  -pop: gets most recent node
+ *  -popA: gets most recent A node
+ *  -popB: gets most recent B node
  *
+ * 1. if no specification, pop per usual
+ *    - if A, use array as stack to hold popped B values until we find an A
+ *    - same for B
  */
 
 
