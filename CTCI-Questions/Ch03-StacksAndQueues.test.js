@@ -52,8 +52,8 @@ describe("Stack Data Structure", () => {
   });
 });
 
-describe("Stack Queue Structure", () => {
-  const queue = buildStructure(9, "queue"); // a stack of ints ordered 1..9
+describe("Queue Data Structure", () => {
+  const queue = buildStructure(9, "queue"); // a queue of ints ordered 1..9
   test("Should print list from 1,2,3..9", () => {
     expect(queue.print()).toEqual("1,2,3,4,5,6,7,8,9");
     expect(queue.size).toEqual(9);
